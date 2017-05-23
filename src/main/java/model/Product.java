@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.List;
 
 /**
  * Created by mariusdragosionita on 19/05/17.
@@ -24,45 +25,28 @@ public class Product {
     private String name;
 
     @JsonProperty
-    private String description;
-
-    @JsonProperty
-    private String averageDeliveryTime;
+    private String averageDeliveryTime;     //relativo a consegne dal magazzino centrale verso magazzini locali
 
     @JsonProperty
     private String stockist;
 
     @JsonProperty
-    private String expDate;
-
-    @JsonProperty
-    private String delDate;
-
-    @JsonProperty
     private String price;
 
     @JsonProperty
-    private String quantity;
-
-    @JsonProperty
-    private String bill;        //order
+    private List<String> properties;
 
     public Product() {
 
     }
 
-    public Product (String id, String name, String description, String averageDeliveryTime, String stockist,
-                    String delDate, String price, String quantity, String bill) {
+    public Product (String name, String averageDeliveryTime, String stockist, String price, List<String> properties) {
 
-        this.id = id;
         this.name = name;
-        this.description = description;
         this.averageDeliveryTime = averageDeliveryTime;
         this.stockist = stockist;
-        this.delDate = delDate;
         this.price = price;
-        this.quantity = quantity;
-        this.bill = bill;
+        this.properties = properties;
 
     }
 
@@ -82,14 +66,6 @@ public class Product {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getAverageDeliveryTime() {
         return averageDeliveryTime;
     }
@@ -106,22 +82,6 @@ public class Product {
         this.stockist = stockist;
     }
 
-    public String getExpDate() {
-        return expDate;
-    }
-
-    public void setExpDate(String expDate) {
-        this.expDate = expDate;
-    }
-
-    public String getDelDate() {
-        return delDate;
-    }
-
-    public void setDelDate(String delDate) {
-        this.delDate = delDate;
-    }
-
     public String getPrice() {
         return price;
     }
@@ -130,19 +90,12 @@ public class Product {
         this.price = price;
     }
 
-    public String getQuantity() {
-        return quantity;
+
+    public List<String> getProperties() {
+        return properties;
     }
 
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getBill() {
-        return bill;
-    }
-
-    public void setBill(String bill) {
-        this.bill = bill;
+    public void setProperties(List<String> properties) {
+        this.properties = properties;
     }
 }
