@@ -17,7 +17,6 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     @JsonProperty
     private String id;
 

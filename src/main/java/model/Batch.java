@@ -1,11 +1,9 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Batch {
@@ -17,6 +15,9 @@ public class Batch {
     private String id;
 
     @JsonProperty
+    @ManyToOne
+    @JoinColumn(name = "id_product")
+    @DBRef
     private String productId;
 
     @JsonProperty
@@ -29,6 +30,9 @@ public class Batch {
     private Integer quantity;
 
     @JsonProperty
+    @ManyToOne
+    @JoinColumn(name = "id_order")
+    @DBRef
     private String orderId;
 
     public Batch () {
