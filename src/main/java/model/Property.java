@@ -3,6 +3,7 @@ package model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.util.List;
 
 /**
@@ -15,6 +16,7 @@ public class Property {
     private String description;
 
     @JsonProperty
+    @Embedded
     private List<String> values;
 
     public Property (){

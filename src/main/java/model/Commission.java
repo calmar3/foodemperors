@@ -3,6 +3,7 @@ package model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.aspectj.weaver.ast.Or;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,12 +11,11 @@ import javax.persistence.Id;
 /**
  * Created by mariusdragosionita on 23/05/17.
  */
-
-public class Order {
+@Entity
+public class Commission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     @JsonProperty
     private String id;
 
@@ -34,13 +34,17 @@ public class Order {
     @JsonProperty
     private String deliveryTime;
 
-    public Order (){
+    public Commission(){
 
     }
 
-    public Order (String id, String number, String date, String source, String destination, String deliveryTime) {
+    public Commission(String number, String date, String source, String destination, String deliveryTime) {
 
-
+        this.number = number;
+        this.date = date;
+        this.source = source;
+        this.destination = destination;
+        this.deliveryTime = deliveryTime;
 
     }
 

@@ -15,13 +15,19 @@ public class PropertyList {
 
     @Id
     @JsonProperty
-    public static final String id = "product_properties";
+    public String id;
 
     @Embedded
     @JsonProperty
     public List<Property> properties;
 
     public PropertyList(){
+
+    }
+
+    public PropertyList(List<Property> properties) {
+
+        this.properties = properties;
 
     }
 

@@ -1,7 +1,6 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import javax.persistence.*;
@@ -34,18 +33,18 @@ public class Batch {
     @ManyToOne
     @JoinColumn(name = "id_order")
     @DBRef
-    private Order order;
+    private Commission commission;
 
     public Batch () {
 
     }
 
-    public Batch (Product product, String expDate, String delDate, Integer quantity, Order order) {
+    public Batch (Product product, String expDate, String delDate, Integer quantity, Commission commission) {
         this.product = product;
         this.expDate = expDate;
         this.delDate = delDate;
         this.quantity = quantity;
-        this.order = order;
+        this.commission = commission;
 
     }
 
@@ -90,11 +89,11 @@ public class Batch {
         this.product = product;
     }
 
-    public Order getOrder() {
-        return order;
+    public Commission getCommission() {
+        return commission;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setCommission(Commission commission) {
+        this.commission = commission;
     }
 }
