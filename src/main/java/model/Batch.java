@@ -1,6 +1,7 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import javax.persistence.*;
@@ -18,7 +19,7 @@ public class Batch {
     @ManyToOne
     @JoinColumn(name = "id_product")
     @DBRef
-    private String productId;
+    private Product product;
 
     @JsonProperty
     private String expDate;
@@ -33,18 +34,18 @@ public class Batch {
     @ManyToOne
     @JoinColumn(name = "id_order")
     @DBRef
-    private String orderId;
+    private Order order;
 
     public Batch () {
 
     }
 
-    public Batch (String productId, String expDate, String delDate, Integer quantity, String orderId) {
-        this.productId = productId;
+    public Batch (Product product, String expDate, String delDate, Integer quantity, Order order) {
+        this.product = product;
         this.expDate = expDate;
         this.delDate = delDate;
         this.quantity = quantity;
-        this.orderId = orderId;
+        this.order = order;
 
     }
 
@@ -55,14 +56,6 @@ public class Batch {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
     }
 
     public String getExpDate() {
@@ -89,11 +82,19 @@ public class Batch {
         this.quantity = quantity;
     }
 
-    public String getOrderId() {
-        return orderId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }
