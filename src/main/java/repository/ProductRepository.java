@@ -11,6 +11,7 @@ import java.util.List;
 public interface ProductRepository extends MongoRepository<Product, Long> {
 
     List<Product> findAll();
-
+    List<Product> findByName(String name);
+    List<Product> findByPropertiesIn (String properties);
 
 }

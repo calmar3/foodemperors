@@ -1,7 +1,6 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
