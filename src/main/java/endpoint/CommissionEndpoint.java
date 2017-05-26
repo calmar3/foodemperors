@@ -8,6 +8,8 @@ import repository.BatchRepository;
 import repository.CommissionRepository;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by marco on 26/05/17.
@@ -37,10 +39,28 @@ public class CommissionEndpoint {
 
 
     @RequestMapping(path = "api/commission/findby/number/{number}", method = RequestMethod.GET)
-    public Commission searchCommissionByNumber(@PathVariable int number) {
-        return commissionRepository.findByNumber(String.valueOf(number));
+    public CommissionDTO searchCommissionByNumber(@PathVariable int number) {
+        Commission commission = commissionRepository.findByNumber(String.valueOf(number));
+        CommissionDTO commissionDTO = new CommissionDTO();
+        commissionDTO.setCommission(commission);
+        commissionDTO.setBatches(batchRepository.findByCommissionId(commission.getId()));
+        return commissionDTO;
 
     }
+
+    @RequestMapping(path = "api/commissions", method = RequestMethod.GET)
+    public List<CommissionDTO> getAllCommissions() {
+        List<Commission> commissions = commissionRepository.findAll();
+        List<CommissionDTO> dtoCommissions = new ArrayList<>();
+        CommissionDTO cDTO = new CommissionDTO();
+        for (Commission cms: commissions){
+            cDTO.setCommission(cms);
+            cDTO.setBatches(batchRepository.findByCommissionId(cms.getId()));
+            dtoCommissions.add(cDTO);
+        }
+        return dtoCommissions;
+    }
+
 
 
 }
