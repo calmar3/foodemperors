@@ -52,8 +52,8 @@ public class CommissionEndpoint {
     public List<CommissionDTO> getAllCommissions() {
         List<Commission> commissions = commissionRepository.findAll();
         List<CommissionDTO> dtoCommissions = new ArrayList<>();
-        CommissionDTO cDTO = new CommissionDTO();
         for (Commission cms: commissions){
+            CommissionDTO cDTO = new CommissionDTO();
             cDTO.setCommission(cms);
             cDTO.setBatches(batchRepository.findByCommissionId(cms.getId()));
             dtoCommissions.add(cDTO);

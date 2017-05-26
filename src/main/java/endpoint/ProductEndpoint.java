@@ -25,17 +25,16 @@ public class ProductEndpoint {
     @RequestMapping(path = "api/product/findby/name/{name}", method = RequestMethod.GET)
     public List<Product> searchProduct(@PathVariable String name) {
         return productRepository.findByName(name);
-
      }
 
     @RequestMapping(path = "api/product/findby/properties/{properties}", method = RequestMethod.GET)
     public List<Product> searchProductByProperties(@PathVariable String properties) {
         return productRepository.findByPropertiesIn(properties);
-
     }
 
-
-
-
+    @RequestMapping(path = "api/products", method = RequestMethod.GET)
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
 
 }
