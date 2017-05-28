@@ -34,6 +34,9 @@ public class UserEndpoint {
             return found;
     }
 
-
-
+    @RequestMapping(path = "api/user/update", method = RequestMethod.POST)
+    public User updateUser(@RequestBody User user) {
+        /* La funzione save inserisce un elemento se non esiste, altrimenti lo aggiorna */
+        return userRepository.save(user);
+    }
 }
