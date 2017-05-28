@@ -8,6 +8,8 @@ import repository.BatchRepository;
 import repository.CommissionRepository;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +39,15 @@ public class CommissionEndpoint {
         return comm;
     }
 
+    @RequestMapping(path = "api/commission", method = RequestMethod.PUT)
+    public Commission updateCommission(@RequestBody CommissionDTO commissionDTO) {
+        Commission comm = commissionRepository.save(commissionDTO.getCommission());
+        for (Batch batch: commissionDTO.getBatches()){
+            batchRepository.save(batch);
+        }
+        return comm;
+    }
+
 
     @RequestMapping(path = "api/commission/findby/number/{number}", method = RequestMethod.GET)
     public CommissionDTO searchCommissionByNumber(@PathVariable int number) {
@@ -59,6 +70,18 @@ public class CommissionEndpoint {
             dtoCommissions.add(cDTO);
         }
         return dtoCommissions;
+    }
+
+    @RequestMapping(path = "api/commission/{id}", method = RequestMethod.DELETE)
+    public Long deleteCommission(@PathVariable String id, HttpServletRequest request, HttpServletResponse response) {
+
+        batchRepository.deleteByCommissionId(id);
+        Long commission =  commissionRepository.deleteById(id);
+        if (commission == 0){
+            response.setStatus(404);
+            return null;
+        }
+        return commission;
     }
 
 
