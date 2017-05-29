@@ -30,6 +30,9 @@ public class Product {
     private String price;
 
     @JsonProperty
+    private Boolean outdated;
+
+    @JsonProperty
     @Embedded
     private List<String> properties;
 
@@ -37,13 +40,14 @@ public class Product {
 
     }
 
-    public Product (String name, String averageDeliveryTime, String stockist, String price, List<String> properties) {
+    public Product (String name, String averageDeliveryTime, String stockist, String price, List<String> properties, Boolean outdated) {
 
         this.name = name;
         this.averageDeliveryTime = averageDeliveryTime;
         this.stockist = stockist;
         this.price = price;
         this.properties = properties;
+        this.outdated = outdated;
 
     }
 
@@ -94,5 +98,13 @@ public class Product {
 
     public void setProperties(List<String> properties) {
         this.properties = properties;
+    }
+
+    public Boolean getOutdated() {
+        return outdated;
+    }
+
+    public void setOutdated(Boolean outdated) {
+        this.outdated = outdated;
     }
 }
