@@ -29,6 +29,10 @@ public class Batch {
     @JsonProperty
     private Integer quantity;
 
+
+    @JsonProperty
+    private String delivered;
+
     @JsonProperty
     @ManyToOne
     @JoinColumn(name = "id_order")
@@ -39,12 +43,13 @@ public class Batch {
 
     }
 
-    public Batch (Product product, String expDate, String delDate, Integer quantity, Commission commission) {
+    public Batch (Product product, String expDate, String delDate, Integer quantity, Commission commission, String delivered) {
         this.product = product;
         this.expDate = expDate;
         this.delDate = delDate;
         this.quantity = quantity;
         this.commission = commission;
+        this.delivered = delivered;
 
     }
 
@@ -96,4 +101,13 @@ public class Batch {
     public void setCommission(Commission commission) {
         this.commission = commission;
     }
+
+    public String getDelivered() {
+        return delivered;
+    }
+
+    public void setDelivered(String delivered) {
+        this.delivered = delivered;
+    }
+
 }
