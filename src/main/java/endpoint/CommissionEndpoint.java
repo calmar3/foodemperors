@@ -42,8 +42,19 @@ public class CommissionEndpoint {
     @RequestMapping(path = "api/commission", method = RequestMethod.PUT)
     public Commission updateCommission(@RequestBody CommissionDTO commissionDTO) {
         Commission comm = commissionRepository.save(commissionDTO.getCommission());
+        List<Batch> batches = batchRepository.findByCommissionId(comm.getId());
         for (Batch batch: commissionDTO.getBatches()){
+            if (batch.getCommission() == null)
+                batch.setCommission(comm);
             batchRepository.save(batch);
+        }
+        for (Batch batch : batches){
+            boolean found = false;
+            for (int i = 0 ; i < commissionDTO.getBatches().size() && !found; i++){
+                found = (batch.getId().equals(commissionDTO.getBatches().get(i).getId()));
+            }
+            if (!found)
+                batchRepository.deleteById(batch.getId());
         }
         return comm;
     }
