@@ -1,9 +1,10 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashMap;
 
 /**
  * Created by mariusdragosionita on 19/05/17.
@@ -31,19 +32,28 @@ public class Product {
 
     @JsonProperty
     @Embedded
-    private List<String> properties;
+    private HashMap<String,String> properties;
+
+
+    @JsonProperty
+    @ManyToOne
+    @JoinColumn(name = "id_topology")
+    @DBRef
+    private Topology topology;
 
     public Product() {
 
     }
 
-    public Product (String name, String averageDeliveryTime, String stockist, String price, List<String> properties) {
+    public Product (String name, String averageDeliveryTime, String stockist, String price,
+                    HashMap<String, String> properties, Topology topology) {
 
         this.name = name;
         this.averageDeliveryTime = averageDeliveryTime;
         this.stockist = stockist;
         this.price = price;
         this.properties = properties;
+        this.topology = topology;
 
     }
 
@@ -88,11 +98,19 @@ public class Product {
     }
 
 
-    public List<String> getProperties() {
+    public HashMap<String, String> getProperties() {
         return properties;
     }
 
-    public void setProperties(List<String> properties) {
+    public void setProperties(HashMap<String, String> properties) {
         this.properties = properties;
+    }
+
+    public Topology getTopology() {
+        return topology;
+    }
+
+    public void setTopology(Topology topology) {
+        this.topology = topology;
     }
 }
