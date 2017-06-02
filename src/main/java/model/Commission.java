@@ -107,5 +107,16 @@ public class Commission {
         this.deliveryTime = deliveryTime;
     }
 
-
+    @Override
+    public String toString() {
+        return "Commission{" +
+                "id='" + id + '\'' +
+                ", number='" + number + '\'' +
+                ", date='" + date + '\'' +
+                ", source='" + source + '\'' +
+                ", destination='" + destination + '\'' +
+                ", deliveryTime='" + deliveryTime + '\'' +
+                ", completed='" + completed + '\'' +
+                '}';
+    }
 }

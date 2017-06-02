@@ -43,9 +43,28 @@ public class BatchEndpoint {
 
 
         Commission commission = commissionRepository.findOne(batches.get(0).getCommission().getId());
+
+        List<Batch> allBatches = batchRepository.findByCommissionId(commission.getId());
+
+        Boolean found = false;
+
+        for(Batch b : allBatches)
+        {
+            if(b.getDelivered().equals("false"))
+                found = true;
+
+        }
+
+
+        if(!found) {
+            commission.setCompleted("true");
+            commissionRepository.save(commission);
+
+
+        }
         CommissionDTO cDTO = new CommissionDTO();
         cDTO.setCommission(commission);
-        cDTO.setBatches(batchRepository.findByCommissionId(commission.getId()));
+        cDTO.setBatches(allBatches);
         return cDTO;
     }
 }
