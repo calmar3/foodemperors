@@ -37,23 +37,24 @@ public class Product {
 
     @JsonProperty
     @ManyToOne
-    @JoinColumn(name = "id_topology")
+    @JoinColumn(name = "id_category")
     @DBRef
-    private Topology topology;
+    private Category category;
+
 
     public Product() {
 
     }
 
     public Product (String name, String averageDeliveryTime, String stockist, String price,
-                    HashMap<String, String> properties, Topology topology) {
+                    HashMap<String, String> properties,Category category) {
 
         this.name = name;
         this.averageDeliveryTime = averageDeliveryTime;
         this.stockist = stockist;
         this.price = price;
         this.properties = properties;
-        this.topology = topology;
+        this.category = category;
 
     }
 
@@ -106,11 +107,11 @@ public class Product {
         this.properties = properties;
     }
 
-    public Topology getTopology() {
-        return topology;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
-    public void setTopology(Topology topology) {
-        this.topology = topology;
+    public Category getCategory(){
+        return this.category;
     }
 }
