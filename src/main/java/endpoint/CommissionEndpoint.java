@@ -55,6 +55,7 @@ public class CommissionEndpoint {
         for (Commission cms: commissions){
             CommissionDTO cDTO = new CommissionDTO();
             cDTO.setCommission(cms);
+            System.out.println(cms.getId());
             cDTO.setBatches(batchRepository.findByCommissionId(cms.getId()));
             dtoCommissions.add(cDTO);
         }
