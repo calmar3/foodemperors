@@ -29,7 +29,6 @@ public class Batch {
     @JsonProperty
     private Integer quantity;
 
-
     @JsonProperty
     private String delivered;
 
@@ -43,7 +42,7 @@ public class Batch {
 
     }
 
-    public Batch (Product product, String expDate, String delDate, Integer quantity, Commission commission, String delivered) {
+    public Batch (Product product, String expDate, String delDate, Integer quantity, Commission commission,String delivered) {
         this.product = product;
         this.expDate = expDate;
         this.delDate = delDate;
@@ -109,5 +108,4 @@ public class Batch {
     public void setDelivered(String delivered) {
         this.delivered = delivered;
     }
-
 }

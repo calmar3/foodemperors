@@ -33,14 +33,6 @@ public class Commission {
     @JsonProperty
     private String deliveryTime;
 
-    public String getCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(String completed) {
-        this.completed = completed;
-    }
-
     @JsonProperty
     private String completed;
 
@@ -107,16 +99,11 @@ public class Commission {
         this.deliveryTime = deliveryTime;
     }
 
-    @Override
-    public String toString() {
-        return "Commission{" +
-                "id='" + id + '\'' +
-                ", number='" + number + '\'' +
-                ", date='" + date + '\'' +
-                ", source='" + source + '\'' +
-                ", destination='" + destination + '\'' +
-                ", deliveryTime='" + deliveryTime + '\'' +
-                ", completed='" + completed + '\'' +
-                '}';
+    public String getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(String completed) {
+        this.completed = completed;
     }
 }
