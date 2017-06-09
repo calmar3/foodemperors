@@ -41,13 +41,16 @@ public class Product {
     @DBRef
     private Category category;
 
+    @JsonProperty
+    private String description;
+
 
     public Product() {
 
     }
 
     public Product (String name, String averageDeliveryTime, String stockist, String price,
-                    HashMap<String, String> properties,Category category) {
+                    HashMap<String, String> properties,Category category,String description) {
 
         this.name = name;
         this.averageDeliveryTime = averageDeliveryTime;
@@ -55,6 +58,7 @@ public class Product {
         this.price = price;
         this.properties = properties;
         this.category = category;
+        this.description = description;
 
     }
 
@@ -113,5 +117,13 @@ public class Product {
 
     public Category getCategory(){
         return this.category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
