@@ -26,6 +26,10 @@ public class Batch {
     @JsonProperty
     private String delDate;
 
+
+    @JsonProperty
+    private Integer remaining;
+
     @JsonProperty
     private Integer quantity;
 
@@ -134,6 +138,15 @@ public class Batch {
 
     public Integer getNumber(){
         return this.number;
+    }
+
+
+    public Integer getRemaining() {
+        return remaining;
+    }
+
+    public void setRemaining(Integer remaining) {
+        this.remaining = remaining;
     }
 
 }

@@ -9,4 +9,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface CatalogueRepository  extends MongoRepository<Catalogue, Long> {
 
+    Catalogue findById(String id);
 }
