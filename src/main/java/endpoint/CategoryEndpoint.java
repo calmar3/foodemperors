@@ -1,13 +1,17 @@
 package endpoint;
 
+
 import dto.CategoryDTO;
+
 import model.Category;
 import org.springframework.web.bind.annotation.*;
 import repository.CategoryRepository;
 
 import javax.inject.Inject;
+
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Created by marco on 03/06/17.
@@ -20,6 +24,7 @@ public class CategoryEndpoint {
     private CategoryRepository categoryRepository;
 
     @RequestMapping(path = "api/category", method = RequestMethod.POST)
+
     public Category saveCategory(@RequestBody CategoryDTO categoryDTO){
 
         Category category = categoryDTO.getCategory();
@@ -43,6 +48,11 @@ public class CategoryEndpoint {
         return categoryRepository.findById(name);
 
     }
+
+    public Category saveCategory(@RequestBody Category category) {
+        return categoryRepository.save(category);
+    }
+    
 
 
 }

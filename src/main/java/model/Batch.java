@@ -49,6 +49,7 @@ public class Batch {
 
     }
 
+
     public Batch (Product product, String expDate, String delDate, Integer quantity,
                   Commission commission,String delivered,Integer number,Double price) {
         this.product = product;
@@ -59,7 +60,6 @@ public class Batch {
         this.delivered = delivered;
         this.number = number;
         this.price = price;
-
     }
 
 
@@ -119,6 +119,7 @@ public class Batch {
         this.delivered = delivered;
     }
 
+
     public void setNumber(Integer number) {
         this.number = number;
     }
@@ -134,4 +135,5 @@ public class Batch {
     public Integer getNumber(){
         return this.number;
     }
+
 }

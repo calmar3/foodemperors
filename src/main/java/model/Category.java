@@ -1,20 +1,25 @@
 package model;
 
+
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import java.util.HashMap;
+
 
 /**
  * Created by marco on 03/06/17.
  */
 @Entity
-@Embeddable
 public class Category {
 
     @Id
@@ -25,6 +30,7 @@ public class Category {
     @Embedded
     @JsonProperty
     private HashMap<String,String> properties;
+
 
 
     @ManyToOne
@@ -38,6 +44,7 @@ public class Category {
     @DBRef
     private List<Category> sons;
 
+
     public Category(){
 
     }
@@ -46,6 +53,7 @@ public class Category {
         this.id = id;
         this.properties = properties;
         this.sons = new ArrayList<>();
+
     }
 
 
@@ -89,5 +97,6 @@ public class Category {
         else
             return null;
     }
+
 
 }
