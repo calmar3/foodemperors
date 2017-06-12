@@ -1,11 +1,14 @@
 package endpoint;
 
 import model.Catalogue;
-import model.Product;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import repository.CatalogueRepository;
 
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Created by simone on 09/06/17.
@@ -17,11 +20,12 @@ public class CatalogueEndPoint {
     @Inject
     CatalogueRepository catalogueRepository;
 
-//    @RequestMapping(path = "api/saveCatalogue", method = RequestMethod.POST)
-//    public Catalogue saveProduct(@RequestBody Catalogue catalogue) {
-//
-//
-//
-//    }
+    @RequestMapping(path = "api/catalogue", method = RequestMethod.GET)
+    public List<Catalogue> getCatalogue() {
+        return catalogueRepository.findAll();
+
+    }
+
+
 
 }
