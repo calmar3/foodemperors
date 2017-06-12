@@ -13,6 +13,8 @@ public class Catalogue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty
+    private String id;
 
     @JsonProperty
     @ManyToOne
@@ -39,5 +41,13 @@ public class Catalogue {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
