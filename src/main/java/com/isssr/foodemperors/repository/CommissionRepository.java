@@ -1,6 +1,6 @@
-package repository;
+package com.isssr.foodemperors.repository;
 
-import model.Commission;
+import com.isssr.foodemperors.model.Commission;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**

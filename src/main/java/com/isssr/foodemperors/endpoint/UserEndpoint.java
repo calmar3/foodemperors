@@ -1,8 +1,8 @@
-package endpoint;
+package com.isssr.foodemperors.endpoint;
 
-import model.User;
+import com.isssr.foodemperors.model.User;
 import org.springframework.web.bind.annotation.*;
-import repository.UserRepository;
+import com.isssr.foodemperors.repository.UserRepository;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;

@@ -1,6 +1,6 @@
-package repository;
+package com.isssr.foodemperors.repository;
 
-import model.Product;
+import com.isssr.foodemperors.model.Product;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

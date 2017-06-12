@@ -1,11 +1,11 @@
-package endpoint;
+package com.isssr.foodemperors.endpoint;
 
-import model.Catalogue;
+import com.isssr.foodemperors.model.Catalogue;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import repository.CatalogueRepository;
+import com.isssr.foodemperors.repository.CatalogueRepository;
 
 import javax.inject.Inject;
 import java.util.List;
