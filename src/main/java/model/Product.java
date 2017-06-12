@@ -50,14 +50,14 @@ public class Product {
     }
 
     public Product (String name, String averageDeliveryTime, String stockist, String price,
-                    HashMap<String, String> properties, Topology topology, Boolean outdated) {
+                    HashMap<String, String> properties, Category category, Boolean outdated) {
 
         this.name = name;
         this.averageDeliveryTime = averageDeliveryTime;
         this.stockist = stockist;
         this.price = price;
         this.properties = properties;
-        this.topology = topology;
+        this.category = category;
         this.outdated = outdated;
 
     }
@@ -111,15 +111,15 @@ public class Product {
         this.properties = properties;
     }
 
-    public Topology getTopology() {
-        return topology;
-    }
-
-    public void setTopology(Topology topology) {
-        this.topology = topology;
-    }
-
     public void setOutdated(boolean outdated) {
         this.outdated = outdated;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
