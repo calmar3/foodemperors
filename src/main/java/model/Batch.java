@@ -38,18 +38,28 @@ public class Batch {
     @DBRef
     private Commission commission;
 
+    @JsonProperty
+    private Integer number;
+
+    @JsonProperty
+    private Double price;
+
+
     public Batch () {
 
     }
 
-    public Batch (Product product, String expDate, String delDate, Integer quantity, Commission commission,String delivered) {
+
+    public Batch (Product product, String expDate, String delDate, Integer quantity,
+                  Commission commission,String delivered,Integer number,Double price) {
         this.product = product;
         this.expDate = expDate;
         this.delDate = delDate;
         this.quantity = quantity;
         this.commission = commission;
         this.delivered = delivered;
-
+        this.number = number;
+        this.price = price;
     }
 
 
@@ -108,4 +118,22 @@ public class Batch {
     public void setDelivered(String delivered) {
         this.delivered = delivered;
     }
+
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Double getPrice(){
+        return this.price;
+    }
+
+    public Integer getNumber(){
+        return this.number;
+    }
+
 }

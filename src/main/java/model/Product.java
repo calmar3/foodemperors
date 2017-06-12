@@ -41,16 +41,19 @@ public class Product {
 
     @JsonProperty
     @ManyToOne
-    @JoinColumn(name = "id_topology")
+    @JoinColumn(name = "id_category")
     @DBRef
     private Category category;
+
+    @JsonProperty
+    private String description;
 
     public Product() {
 
     }
 
     public Product (String name, String averageDeliveryTime, String stockist, String price,
-                    HashMap<String, String> properties, Category category, Boolean outdated) {
+                    HashMap<String, String> properties, Category category, Boolean outdated, String description) {
 
         this.name = name;
         this.averageDeliveryTime = averageDeliveryTime;
@@ -59,6 +62,7 @@ public class Product {
         this.properties = properties;
         this.category = category;
         this.outdated = outdated;
+        this.description = description;
 
     }
 
@@ -121,5 +125,13 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

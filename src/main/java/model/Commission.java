@@ -11,7 +11,7 @@ import javax.persistence.Id;
  * Created by mariusdragosionita on 23/05/17.
  */
 @Entity
-public class Commission {
+public class  Commission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

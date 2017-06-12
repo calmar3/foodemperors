@@ -11,4 +11,6 @@ import java.util.List;
 public interface CategoryRepository  extends MongoRepository<Category, Long> {
 
     List<Category> findAll();
+
+    Category findById(String father);
 }
