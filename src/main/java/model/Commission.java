@@ -11,7 +11,7 @@ import javax.persistence.Id;
  * Created by mariusdragosionita on 23/05/17.
  */
 @Entity
-public class Commission {
+public class  Commission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,17 +33,21 @@ public class Commission {
     @JsonProperty
     private String deliveryTime;
 
+    @JsonProperty
+    private String completed;
+
     public Commission(){
 
     }
 
-    public Commission(String number, String date, String source, String destination, String deliveryTime) {
+    public Commission(String number, String date, String source, String destination, String deliveryTime,String completed) {
 
         this.number = number;
         this.date = date;
         this.source = source;
         this.destination = destination;
         this.deliveryTime = deliveryTime;
+        this.completed = completed;
 
     }
 
@@ -93,5 +97,13 @@ public class Commission {
 
     public void setDeliveryTime(String deliveryTime) {
         this.deliveryTime = deliveryTime;
+    }
+
+    public String getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(String completed) {
+        this.completed = completed;
     }
 }
