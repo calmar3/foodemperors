@@ -3,9 +3,9 @@ package endpoint;
 import model.Product;
 import org.springframework.web.bind.annotation.*;
 import repository.ProductRepository;
+import service.ProductService;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +14,9 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 public class ProductEndpoint {
+
+    @Inject
+    private ProductService productService;
 
     @Inject
     private ProductRepository productRepository;
@@ -25,14 +28,7 @@ public class ProductEndpoint {
      */
     @RequestMapping(path = "api/product", method = RequestMethod.POST)
     public Product saveProduct(@RequestBody Product product) {
-
-        product.setDescription("");
-        for (String key : product.getProperties().keySet()) {
-            String desc = product.getDescription();
-            desc += product.getProperties().get(key) + " ";
-            product.setDescription(desc);
-        }
-        return productRepository.save(product);
+        return productService.saveProduct(product);
     }
 
     @RequestMapping(path = "api/product/findby/name/{name}", method = RequestMethod.GET)
@@ -40,20 +36,9 @@ public class ProductEndpoint {
         return productRepository.findByName(name);
      }
 
-    @RequestMapping(path = "api/product/findby/properties/{properties}", method = RequestMethod.GET)
-    public List<Product> searchProductByProperties(@PathVariable String properties) {
-        String[] props = properties.split(" ");
-        List<Product> products = new ArrayList<>();
-        products.addAll(productRepository.findByDescriptionLike(props[0]));
-        for(Product product:products){
-            for (int i = 1 ; i < props.length ; i++ ){
-                if (!(product.getDescription().toLowerCase().contains(props[i].toLowerCase()))){
-                    products.remove(product);
-                    break;
-                }
-            }
-        }
-        return products;
+    @RequestMapping(path = "api/product/findby/category/properties/{strings}", method = RequestMethod.GET)
+    public List<Product> searchProductByProperties(@PathVariable String strings) {
+        return productService.getByCategoryAndProperties(strings);
     }
 
     @RequestMapping(path = "api/products", method = RequestMethod.GET)
