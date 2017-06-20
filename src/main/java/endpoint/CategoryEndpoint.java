@@ -43,8 +43,21 @@ public class CategoryEndpoint {
         return categoryRepository.save(category);
     }
 
-    @RequestMapping(path = "api/category/findby/name/{name}", method = RequestMethod.GET)
+   /* @RequestMapping(path = "api/category/findby/name/{name}", method = RequestMethod.GET)
     public Category searchProduct(@PathVariable String name) {
+        return categoryRepository.findById(name);
+
+    }*/
+
+    @RequestMapping(path = "api/category", method = RequestMethod.GET)
+    public List<Category> getCategories() {
+        return categoryRepository.findAll();
+
+    }
+
+
+    @RequestMapping(path = "api/category/findby/id/{id}", method = RequestMethod.GET)
+    public Category takeCategory(@PathVariable String name) {
         return categoryRepository.findById(name);
 
     }
