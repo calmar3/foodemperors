@@ -152,6 +152,10 @@ public class Product {
         List<String> idList = new ArrayList<>();
         List<Property> propertyList = getPropertyList();
 
+        if(propertyList == null) {
+            return null;
+        }
+
         for(Property property : propertyList) {
             if(property != null) {
                 idList.add(property.getId());
