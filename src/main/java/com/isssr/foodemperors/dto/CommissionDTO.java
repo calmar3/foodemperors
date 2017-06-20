@@ -1,8 +1,8 @@
-package dto;
+package com.isssr.foodemperors.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import model.Batch;
-import model.Commission;
+import com.isssr.foodemperors.model.Batch;
+import com.isssr.foodemperors.model.Commission;
 
 import java.util.List;
 

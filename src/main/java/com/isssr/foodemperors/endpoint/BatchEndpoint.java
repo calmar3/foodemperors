@@ -1,15 +1,14 @@
-package endpoint;
+package com.isssr.foodemperors.endpoint;
 
-import dto.CommissionDTO;
-import model.Batch;
-import model.Catalogue;
-import model.Commission;
-import model.Product;
+import com.isssr.foodemperors.dto.CommissionDTO;
+import com.isssr.foodemperors.model.Batch;
+import com.isssr.foodemperors.model.Catalogue;
+import com.isssr.foodemperors.model.Commission;
+import com.isssr.foodemperors.model.Product;
 import org.springframework.web.bind.annotation.*;
-import repository.BatchRepository;
-import repository.CatalogueRepository;
-import repository.CommissionRepository;
-import repository.ProductRepository;
+import com.isssr.foodemperors.repository.BatchRepository;
+import com.isssr.foodemperors.repository.CatalogueRepository;
+import com.isssr.foodemperors.repository.CommissionRepository;
 
 import javax.inject.Inject;
 import java.util.ArrayList;

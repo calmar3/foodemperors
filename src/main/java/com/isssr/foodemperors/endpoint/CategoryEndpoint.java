@@ -1,11 +1,11 @@
-package endpoint;
+package com.isssr.foodemperors.endpoint;
 
 
-import dto.CategoryDTO;
+import com.isssr.foodemperors.dto.CategoryDTO;
 
-import model.Category;
+import com.isssr.foodemperors.model.Category;
 import org.springframework.web.bind.annotation.*;
-import repository.CategoryRepository;
+import com.isssr.foodemperors.repository.CategoryRepository;
 
 import javax.inject.Inject;
 

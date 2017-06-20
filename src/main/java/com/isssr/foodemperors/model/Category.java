@@ -1,4 +1,4 @@
-package model;
+package com.isssr.foodemperors.model;
 
 
 import com.fasterxml.jackson.annotation.JsonGetter;
@@ -12,8 +12,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import java.util.HashMap;
 
 
 /**

@@ -1,4 +1,4 @@
-package model;
+package com.isssr.foodemperors.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
