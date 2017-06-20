@@ -13,6 +13,7 @@ import repository.ProductRepository;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -100,17 +101,45 @@ public class BatchEndpoint {
 
         List<Batch> batchList = batchRepository.findByProductId(product.getId());
 
+        ArrayList<Batch> whisper = new ArrayList<>();
+
+        Iterator<Batch> iter = batchList.iterator();
+        while(iter.hasNext()) {
+            Batch b = iter.next();
+
+            if(b.getRemaining()!=null)
+                if(b.getCommission().getDestination().equals("FoodEmperors") && b.getRemaining()>=0)
+                    whisper.add(b);
+
+        }
 
 
-        for(Batch b : batchList)
-        {
-
-            if(b.getCommission().getDestination().equals("FoodEmperors") ||b.getRemaining()==null)
-                if(b.getRemaining()==0)
-                    batchList.remove(b);
-            }
 
 
-        return batchList;
+        ;
+
+
+
+
+//        for(Batch b : batchList)
+//        {
+//            System.out.println(batchList.size());
+//            System.out.println(b.getId());
+//            System.out.println(b.getRemaining());
+//
+//            if(b.getRemaining()==null) {
+//                batchList.remove(b);
+//                System.out.println("SONO QUI");
+//            }
+//            else
+//                if(b.getCommission().getDestination().equals("FoodEmperors") || b.getRemaining()==0)
+//                    batchList.remove(b);
+//
+//
+//            System.out.println("E MO QUI");
+//        }
+
+
+        return whisper;
     }
 }
