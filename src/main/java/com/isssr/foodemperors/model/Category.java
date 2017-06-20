@@ -37,7 +37,6 @@ public class Category {
     @JsonIgnore
     private Category father;
 
-
     @OneToMany
     @JoinColumn(name = "id_sons")
     @DBRef

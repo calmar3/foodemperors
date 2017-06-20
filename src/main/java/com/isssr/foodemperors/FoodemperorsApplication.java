@@ -8,10 +8,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication
-@ComponentScan({"com.isssr.foodemperors.endpoint"})
-@EntityScan("com/isssr/foodemperors/model")
-@EnableJpaRepositories("com.isssr.foodemperors.repository")
-@EnableMongoRepositories("com.isssr.foodemperors.repository")
 public class FoodemperorsApplication {
 
 	public static void main(String[] args) {

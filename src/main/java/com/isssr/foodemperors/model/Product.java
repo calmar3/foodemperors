@@ -1,10 +1,13 @@
 package com.isssr.foodemperors.model;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.mongodb.core.mapping.DBRef;
-
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by mariusdragosionita on 19/05/17.
@@ -45,13 +48,20 @@ public class Product {
     @JsonProperty
     private String description;
 
+    @ManyToMany
+    @JoinColumn(name = "id_properties")
+    @DBRef
+    @JsonProperty
+    @JsonIgnore
+    private List<Property> propertyList;
 
     public Product() {
 
     }
 
     public Product (String name, String averageDeliveryTime, String stockist, String price,
-                    HashMap<String, String> properties,Category category,String description) {
+                    HashMap<String, String> properties,Category category,String description,
+                    List<Property> propertyList) {
         this.name = name;
         this.averageDeliveryTime = averageDeliveryTime;
         this.stockist = stockist;
@@ -60,7 +70,7 @@ public class Product {
         this.category = category;
 
         this.description = description;
-
+        this.propertyList = propertyList;
 
     }
 
@@ -104,7 +114,6 @@ public class Product {
         this.price = price;
     }
 
-
     public HashMap<String, String> getProperties() {
         return properties;
     }
@@ -121,7 +130,6 @@ public class Product {
         return this.category;
     }
 
-
     public String getDescription() {
         return description;
     }
@@ -130,4 +138,34 @@ public class Product {
         this.description = description;
     }
 
+    public List<Property> getPropertyList() {
+        return propertyList;
+    }
+
+    public void setPropertyList(List<Property> propertyList) {
+        this.propertyList = propertyList;
+    }
+
+
+    @JsonGetter
+    public List<String> getPropertiesId() {
+        List<String> idList = new ArrayList<>();
+        List<Property> propertyList = getPropertyList();
+
+        if(propertyList == null)
+            return null;
+
+
+        for(Property property : propertyList) {
+            if(property != null) {
+                idList.add(property.getId());
+            }
+        }
+        if(idList.size() > 0) {
+            return idList;
+        }
+        else {
+            return null;
+        }
+    }
 }

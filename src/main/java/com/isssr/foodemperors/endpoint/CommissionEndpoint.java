@@ -79,6 +79,7 @@ public class CommissionEndpoint {
             cDTO.setCommission(cms);
             cDTO.setBatches(batchRepository.findByCommissionId(cms.getId()));
             dtoCommissions.add(cDTO);
+
         }
         return dtoCommissions;
     }
