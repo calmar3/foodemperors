@@ -1,6 +1,6 @@
-package repository;
+package com.isssr.foodemperors.repository;
 
-import model.Batch;
+import com.isssr.foodemperors.model.Batch;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

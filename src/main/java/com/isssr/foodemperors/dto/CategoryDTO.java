@@ -1,6 +1,6 @@
-package dto;
+package com.isssr.foodemperors.dto;
 
-import model.Category;
+import com.isssr.foodemperors.model.Category;
 
 /**
  * Created by marco on 06/06/17.

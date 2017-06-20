@@ -1,8 +1,8 @@
-package endpoint;
+package com.isssr.foodemperors.endpoint;
 
-import model.Product;
+import com.isssr.foodemperors.model.Product;
 import org.springframework.web.bind.annotation.*;
-import repository.ProductRepository;
+import com.isssr.foodemperors.repository.ProductRepository;
 
 import javax.inject.Inject;
 import java.util.ArrayList;

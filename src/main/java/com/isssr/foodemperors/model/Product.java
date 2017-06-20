@@ -1,11 +1,10 @@
-package model;
+package com.isssr.foodemperors.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import javax.persistence.*;
 import java.util.HashMap;
-import java.util.Locale;
 
 /**
  * Created by mariusdragosionita on 19/05/17.
