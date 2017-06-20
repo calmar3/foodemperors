@@ -15,7 +15,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.3.RELEASE</version>
-		<relativePath/> <!-- lookup parent fcom.isssr.foodemperors.repositorytory -->
+		<relativePath/> <!-- lookup parent from com.isssr.foodemperors.repository -->
 	</parent>
 
 	<properties>
