@@ -2,14 +2,14 @@ package com.isssr.foodemperors.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+
 import javax.persistence.*;
 import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by Caim03 on 12/06/17.
+ * Created by mariusdragosionita on 23/05/17.
  */
-
 @Entity
 public class Property {
 

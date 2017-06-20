@@ -1,4 +1,4 @@
-package com.core;
+package com.isssr.foodemperors;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
