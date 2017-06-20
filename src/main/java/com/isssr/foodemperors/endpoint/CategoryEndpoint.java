@@ -25,11 +25,11 @@ public class CategoryEndpoint {
 
     @RequestMapping(path = "api/category", method = RequestMethod.POST)
 
-    public Category saveCategory(@RequestBody CategoryDTO categoryDTO){
+    public Category saveCategory(@RequestBody CategoryDTO categoryDTO) {
 
         Category category = categoryDTO.getCategory();
 
-        if (categoryDTO.getFather() == null){
+        if (categoryDTO.getFather() == null) {
             return categoryRepository.save(category);
         }
         Category father = categoryRepository.findById(categoryDTO.getFather());
@@ -43,10 +43,11 @@ public class CategoryEndpoint {
         return categoryRepository.save(category);
     }
 
-    @RequestMapping(path = "api/category/findby/name/{name}", method = RequestMethod.GET)
+   /* @RequestMapping(path = "api/category/findby/name/{name}", method = RequestMethod.GET)
     public Category searchProduct(@PathVariable String name) {
         return categoryRepository.findById(name);
-    }
+
+    }*/
 
     @RequestMapping(path = "api/category", method = RequestMethod.GET)
     public List<Category> getCategories() {
@@ -59,12 +60,11 @@ public class CategoryEndpoint {
     public Category takeCategory(@PathVariable String name) {
         return categoryRepository.findById(name);
 
+
     }
+    @RequestMapping(path = "api/category/findby/name/{name}", method = RequestMethod.GET)
+    public Category searchProduct (@PathVariable String name){
+        return categoryRepository.findById(name);
 
-    public Category saveCategory(@RequestBody Category category) {
-        return categoryRepository.save(category);
     }
-    
-
-
 }
