@@ -2,7 +2,7 @@ package com.isssr.foodemperors.endpoint;
 
 import com.isssr.foodemperors.model.Property;
 import org.springframework.web.bind.annotation.*;
-import com.isssr.foodemperors.service.spec.PropertyService;
+import com.isssr.foodemperors.service.PropertyService;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -19,7 +19,7 @@ public class PropertyEndPoint {
     private PropertyService propertyService;
 
     @RequestMapping(path = "api/property", method = RequestMethod.POST)
-    public Property saveProperty(@RequestParam Property property) {
+    public Property saveProperty(@RequestBody Property property) {
         return propertyService.saveProperty(property);
     }
 

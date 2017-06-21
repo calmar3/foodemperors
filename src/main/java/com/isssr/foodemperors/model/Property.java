@@ -2,14 +2,14 @@ package com.isssr.foodemperors.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+
 import javax.persistence.*;
 import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by Caim03 on 12/06/17.
+ * Created by mariusdragosionita on 23/05/17.
  */
-
 @Entity
 public class Property {
 
@@ -26,14 +26,14 @@ public class Property {
     @JoinColumn(name = "id_products")
     @DBRef
     @JsonProperty
-    private List<Product> productList;
+    private List<Product> productlist;
 
     public Property() {}
 
-    public Property(String id, HashMap<String, String> properties, List<Product> productList) {
+    public Property(String id, HashMap<String, String> properties, List<Product> productlist) {
         this.id = id;
         this.properties = properties;
-        this.productList = productList;
+        this.productlist = productlist;
     }
 
     public String getId() {
@@ -52,11 +52,11 @@ public class Property {
         this.properties = properties;
     }
 
-    public List<Product> getProductList() {
-        return productList;
+    public List<Product> getProductlist() {
+        return productlist;
     }
 
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
+    public void setProductlist(List<Product> productlist) {
+        this.productlist = productlist;
     }
 }

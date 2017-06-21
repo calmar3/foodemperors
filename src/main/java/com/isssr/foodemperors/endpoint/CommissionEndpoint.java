@@ -1,11 +1,16 @@
 package com.isssr.foodemperors.endpoint;
 
 import com.isssr.foodemperors.dto.CommissionDTO;
-import com.isssr.foodemperors.model.Batch;
+
+
+
 import com.isssr.foodemperors.model.Commission;
 import org.springframework.web.bind.annotation.*;
 import com.isssr.foodemperors.repository.BatchRepository;
 import com.isssr.foodemperors.repository.CommissionRepository;
+
+import com.isssr.foodemperors.service.CommissionService;
+
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -26,37 +31,20 @@ public class CommissionEndpoint {
     @Inject
     private BatchRepository batchRepository;
 
+    @Inject
+    private CommissionService commissionService;
+
     @RequestMapping(path = "api/commission", method = RequestMethod.POST)
     public Commission saveCommission(@RequestBody CommissionDTO commissionDTO) {
-        /**
-         * Control over commission fields
-         */
-        Commission comm = commissionRepository.save(commissionDTO.getCommission());
-        for (Batch batch: commissionDTO.getBatches()){
-            batch.setCommission(comm);
-            batchRepository.save(batch);
-        }
-        return comm;
+        return commissionService.saveCommission(commissionDTO.getCommission(),commissionDTO.getBatches());
+
     }
 
     @RequestMapping(path = "api/commission", method = RequestMethod.PUT)
     public Commission updateCommission(@RequestBody CommissionDTO commissionDTO) {
-        Commission comm = commissionRepository.save(commissionDTO.getCommission());
-        List<Batch> batches = batchRepository.findByCommissionId(comm.getId());
-        for (Batch batch: commissionDTO.getBatches()){
-            if (batch.getCommission() == null)
-                batch.setCommission(comm);
-            batchRepository.save(batch);
-        }
-        for (Batch batch : batches){
-            boolean found = false;
-            for (int i = 0 ; i < commissionDTO.getBatches().size() && !found; i++){
-                found = (batch.getId().equals(commissionDTO.getBatches().get(i).getId()));
-            }
-            if (!found)
-                batchRepository.deleteById(batch.getId());
-        }
-        return comm;
+
+        return commissionService.updateCommission(commissionDTO.getCommission(),commissionDTO.getBatches());
+
     }
 
 
@@ -94,7 +82,5 @@ public class CommissionEndpoint {
         }
         return commission;
     }
-
-
 
 }
