@@ -55,22 +55,25 @@ public class Product {
     @JsonIgnore
     private List<Property> propertylist;
 
+    @JsonProperty
+    private Float charge;
+
     public Product() {
 
     }
 
     public Product (String name, String averageDeliveryTime, String stockist, String price,
                     HashMap<String, String> properties,Category category,String description,
-                    List<Property> propertylist) {
+                    List<Property> propertylist,Float charge) {
         this.name = name;
         this.averageDeliveryTime = averageDeliveryTime;
         this.stockist = stockist;
         this.price = price;
         this.properties = properties;
         this.category = category;
-
         this.description = description;
         this.propertylist = propertylist;
+        this.charge = charge;
 
     }
 
@@ -167,5 +170,13 @@ public class Product {
         else {
             return null;
         }
+    }
+
+    public Float getCharge() {
+        return charge;
+    }
+
+    public void setCharge(Float charge) {
+        this.charge = charge;
     }
 }

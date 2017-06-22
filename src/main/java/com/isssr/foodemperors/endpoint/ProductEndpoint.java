@@ -42,6 +42,10 @@ public class ProductEndpoint {
         return productRepository.findAll();
     }
 
+    @RequestMapping(path = "api/product", method = RequestMethod.PUT)
+    public Product updateProduct(@RequestBody Product product) {
+        return productService.saveProduct(product);
+    }
 
 
 }
