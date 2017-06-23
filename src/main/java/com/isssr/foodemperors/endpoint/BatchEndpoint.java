@@ -3,6 +3,7 @@ package com.isssr.foodemperors.endpoint;
 import com.isssr.foodemperors.dto.CommissionDTO;
 import com.isssr.foodemperors.model.Batch;
 import com.isssr.foodemperors.model.Commission;
+import com.isssr.foodemperors.service.BatchService;
 import org.springframework.web.bind.annotation.*;
 import com.isssr.foodemperors.repository.BatchRepository;
 import com.isssr.foodemperors.repository.CommissionRepository;
@@ -27,6 +28,9 @@ public class BatchEndpoint {
 
     @Inject
     private CommissionRepository commissionRepository;
+
+    @Inject
+    private BatchService batchService;
 
     /**
      *  Salva i batches aggiornati e restituisce il commissionDTO con la commission aggiornata
@@ -64,5 +68,15 @@ public class BatchEndpoint {
         cDTO.setCommission(commission);
         cDTO.setBatches(allBatches);
         return cDTO;
+    }
+
+    @RequestMapping(path = "api/batches/expiring", method = RequestMethod.GET)
+    public List<Batch> getExpiringBatches(){
+        return batchService.getExpiringBatches();
+    }
+
+    @RequestMapping(path = "api/batches", method = RequestMethod.PUT)
+    public List<Batch> updateBatches(@RequestBody List<Batch> batches){
+        return batchService.updateBatches(batches);
     }
 }

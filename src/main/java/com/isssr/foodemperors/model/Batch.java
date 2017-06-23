@@ -41,8 +41,15 @@ public class Batch {
     @JsonProperty
     private Integer number;
 
+
+    @JsonProperty
+    private Integer remaining;
+
     @JsonProperty
     private Double price;
+
+    @JsonProperty
+    private Double sale;
 
 
     public Batch () {
@@ -51,7 +58,8 @@ public class Batch {
 
 
     public Batch (Product product, String expDate, String delDate, Integer quantity,
-                  Commission commission,String delivered,Integer number,Double price) {
+                  Commission commission,String delivered,Integer number,Double price,Integer remaining,
+                  Double sale) {
         this.product = product;
         this.expDate = expDate;
         this.delDate = delDate;
@@ -60,6 +68,8 @@ public class Batch {
         this.delivered = delivered;
         this.number = number;
         this.price = price;
+        this.remaining = remaining;
+        this.sale = sale;
     }
 
 
@@ -119,7 +129,6 @@ public class Batch {
         this.delivered = delivered;
     }
 
-
     public void setNumber(Integer number) {
         this.number = number;
     }
@@ -134,6 +143,23 @@ public class Batch {
 
     public Integer getNumber(){
         return this.number;
+    }
+
+    public Integer getRemaining() {
+        return remaining;
+    }
+
+    public void setRemaining(Integer remaining) {
+        this.remaining = remaining;
+    }
+
+
+    public Double getSale() {
+        return sale;
+    }
+
+    public void setSale(Double sale) {
+        this.sale = sale;
     }
 
 }
