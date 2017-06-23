@@ -1,11 +1,9 @@
 package com.isssr.foodemperors.service;
 
 import com.isssr.foodemperors.dto.CommissionDTO;
-import com.isssr.foodemperors.model.Batch;
-import com.isssr.foodemperors.model.Catalogue;
-import com.isssr.foodemperors.model.Commission;
-import com.isssr.foodemperors.model.Product;
+import com.isssr.foodemperors.model.*;
 import com.isssr.foodemperors.repository.BatchRepository;
+import com.isssr.foodemperors.repository.BatchesRelationRepository;
 import com.isssr.foodemperors.repository.CatalogueRepository;
 import com.isssr.foodemperors.repository.CommissionRepository;
 import org.springframework.stereotype.Service;
@@ -30,6 +28,9 @@ public class BatchService {
 
     @Inject
     private CatalogueRepository catalogueRepository;
+
+    @Inject
+    private BatchesRelationRepository batchesRelationRepository;
 
 
     public CommissionDTO saveBatch(ArrayList<Batch> batches) {
@@ -140,7 +141,6 @@ public class BatchService {
         boolean found = false;
         for(Batch b : allCommissionBatches)
         {
-            System.out.println(b.getDelivered());
             if(!b.getDelivered().equals("true") && !b.getDelivered().equals("ready"))
                 found = true;
 
@@ -153,8 +153,39 @@ public class BatchService {
         }
 
 
-        return null;
+        //4) Aggiorna BatchesRelation (NOTA: outBatches e inBatches vanno a 2 a 2!)
 
+        for(i=0;i<outBatches.size();i++)
+        {
+
+
+
+
+            BatchesRelation batchesRelation = batchesRelationRepository.findByBatch(ourBatches.get(i));
+
+
+            System.out.println(batchesRelation);
+            List<Batch> outBatch;
+
+            if(batchesRelation == null) {
+                batchesRelation = new BatchesRelation();
+                batchesRelation.setBatch(ourBatches.get(i));
+                outBatch = new ArrayList<>();
+            }
+            else
+                outBatch = batchesRelation.getOutBatches();
+
+
+            outBatch.add(outBatches.get(i));
+
+            batchesRelation.setOutBatches(outBatch);
+
+            batchesRelationRepository.save(batchesRelation);
+
+
+        }
+
+        return null;
 
 
 
