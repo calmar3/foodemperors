@@ -30,10 +30,13 @@ public class ProductService {
         String[] props = properties.split(" - ");
         String[] productProps = props[1].split(" ");
         List<Product> products = productRepository.findByCategoryId(props[0]);
-        for(Product product:products){
+        for(int j = 0 ; j < products.size() ; j++){
             for (int i = 0 ; i < productProps.length ; i++ ){
-                if (!(product.getDescription().toLowerCase().contains(productProps[i].toLowerCase()))){
-                    products.remove(product);
+                if (! (products.get(j).getDescription().toLowerCase().contains(productProps[i].toLowerCase())) &&
+                        !(products.get(j).getName().toLowerCase().contains(productProps[i].toLowerCase())) &&
+                        !(products.get(j).getStockist().toLowerCase().contains(productProps[i].toLowerCase()))){
+                    products.remove(products.get(j));
+                    j--;
                     break;
                 }
             }
