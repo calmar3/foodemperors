@@ -149,4 +149,13 @@ public class Batch {
         this.remaining = remaining;
     }
 
+    public boolean isDelivered()
+    {
+        if(delivered.equals("true"))
+            return true;
+        else
+            return false;
+
+    }
+
 }

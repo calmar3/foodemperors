@@ -1,8 +1,8 @@
 package com.isssr.foodemperors.endpoint;
 
 import com.isssr.foodemperors.model.Property;
+import com.isssr.foodemperors.service.PropertyService;
 import org.springframework.web.bind.annotation.*;
-import com.isssr.foodemperors.service.spec.PropertyService;
 
 import javax.inject.Inject;
 import java.util.List;

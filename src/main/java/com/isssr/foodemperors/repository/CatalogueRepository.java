@@ -1,6 +1,7 @@
 package com.isssr.foodemperors.repository;
 
 import com.isssr.foodemperors.model.Catalogue;
+import com.isssr.foodemperors.model.Product;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
@@ -8,5 +9,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface CatalogueRepository  extends MongoRepository<Catalogue, Long> {
 
+    Catalogue findByProductId(String Id);
     Catalogue findById(String id);
+
 }

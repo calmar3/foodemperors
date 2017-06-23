@@ -27,6 +27,16 @@ public class Catalogue {
     private Integer quantity;
 
 
+    public Catalogue() {
+
+    }
+
+    public Catalogue(String id,Product product, Integer quantity) {
+        this.id = id;
+        this.product = product;
+        this.quantity = quantity;
+    }
+
     public Product getProduct() {
         return product;
     }
