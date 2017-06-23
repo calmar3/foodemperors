@@ -36,20 +36,20 @@ public class PeripheralWarehouse {
     private Integer employeesNumbers;
 
     @JsonProperty
-    private String PIVA;
+    private String pIVA;
 
     public PeripheralWarehouse() {
 
     }
 
-    public PeripheralWarehouse(String name,String address,String phone, String serverAddress,String warehouseManager,Integer employeesNumbers, String PIVA){
+    public PeripheralWarehouse(String name,String address,String phone, String serverAddress,String warehouseManager,Integer employeesNumbers, String pIVA){
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.serverAddress = serverAddress;
         this.warehouseManager = warehouseManager;
         this.employeesNumbers = employeesNumbers;
-        this.PIVA = PIVA;
+        this.pIVA = pIVA;
 
 
     }
@@ -111,10 +111,10 @@ public class PeripheralWarehouse {
     }
 
     public String getPIVA() {
-        return PIVA;
+        return pIVA;
     }
 
     public void setPIVA(String PIVA) {
-        this.PIVA = PIVA;
+        this.pIVA = pIVA;
     }
 }

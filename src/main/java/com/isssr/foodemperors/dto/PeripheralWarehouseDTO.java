@@ -13,6 +13,7 @@ public class PeripheralWarehouseDTO {
 
     
     public PeripheralWarehouse getPeripheralWarehouse() {
+
         return peripheralWarehouse;
     }
 
