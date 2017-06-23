@@ -17,6 +17,14 @@ public class CommissionDTO {
     @JsonProperty
     private List<Batch> batches;
 
+    public CommissionDTO() {
+    }
+
+    public CommissionDTO(Commission commission, List<Batch> batches) {
+        this.commission = commission;
+        this.batches = batches;
+    }
+
     public List<Batch> getBatches() {
         return batches;
     }

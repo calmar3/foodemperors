@@ -3,7 +3,6 @@ package com.isssr.foodemperors.service;
 import com.isssr.foodemperors.model.Property;
 import org.springframework.stereotype.Service;
 import com.isssr.foodemperors.repository.PropertyRepository;
-
 import javax.inject.Inject;
 import java.util.List;
 
@@ -12,7 +11,7 @@ import java.util.List;
  */
 
 @Service
-public class PropertyService {
+public class PropertyService{
 
     @Inject
     private PropertyRepository propertyRepository;

@@ -53,7 +53,7 @@ public class Product {
     @DBRef
     @JsonProperty
     @JsonIgnore
-    private List<Property> propertylist;
+    private List<Property> propertyList;
 
     public Product() {
 
@@ -61,7 +61,7 @@ public class Product {
 
     public Product (String name, String averageDeliveryTime, String stockist, String price,
                     HashMap<String, String> properties,Category category,String description,
-                    List<Property> propertylist) {
+                    List<Property> propertyList) {
         this.name = name;
         this.averageDeliveryTime = averageDeliveryTime;
         this.stockist = stockist;
@@ -70,7 +70,7 @@ public class Product {
         this.category = category;
 
         this.description = description;
-        this.propertylist = propertylist;
+        this.propertyList = propertyList;
 
     }
 
@@ -138,25 +138,25 @@ public class Product {
         this.description = description;
     }
 
-    public List<Property> getPropertylist() {
-        return propertylist;
+    public List<Property> getPropertyList() {
+        return propertyList;
     }
 
-    public void setPropertylist(List<Property> propertylist) {
-        this.propertylist = propertylist;
+    public void setPropertyList(List<Property> propertyList) {
+        this.propertyList = propertyList;
     }
 
 
     @JsonGetter
     public List<String> getPropertiesId() {
         List<String> idList = new ArrayList<>();
-        List<Property> propertylist = getPropertylist();
+        List<Property> propertyList = getPropertyList();
 
-        if(propertylist == null) {
+        if(propertyList == null)
             return null;
-        }
 
-        for(Property property : propertylist) {
+
+        for(Property property : propertyList) {
             if(property != null) {
                 idList.add(property.getId());
             }

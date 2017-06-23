@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * Created by simone on 09/06/17.
  */
-@RestController
 @CrossOrigin(origins = "*")
 public class CatalogueEndPoint {
 

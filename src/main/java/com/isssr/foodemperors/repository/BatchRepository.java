@@ -11,6 +11,8 @@ import java.util.List;
 public interface BatchRepository extends MongoRepository<Batch, Long> {
 
     List<Batch> findByCommissionId(String Id);
+
+    List<Batch> findByProductId(String Id);
     Long deleteByCommissionId(String Id);
     Long deleteById(String Id);
 }
