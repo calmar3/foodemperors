@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 public class DeliveryNote {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonProperty
     private String id;
 

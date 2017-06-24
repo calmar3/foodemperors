@@ -1,6 +1,8 @@
 package com.isssr.foodemperors.service;
 
+import com.isssr.foodemperors.model.Batch;
 import com.isssr.foodemperors.model.DeliveryNote;
+import com.isssr.foodemperors.repository.BatchRepository;
 import com.isssr.foodemperors.repository.DeliveryNoteRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,9 @@ public class DeliveryNoteService {
     @Inject
     private DeliveryNoteRepository deliveryNoteRepository;
 
+    @Inject
+    private BatchRepository batchRepository;
+
     public List<DeliveryNote> searchAll() {
         return deliveryNoteRepository.findAll();
     }
@@ -26,7 +31,12 @@ public class DeliveryNoteService {
     }
 
     public DeliveryNote saveDeliveryNote(DeliveryNote deliveryNote) {
-        return deliveryNoteRepository.save(deliveryNote);
+        DeliveryNote saveDelivery = deliveryNoteRepository.save(deliveryNote);
+        for (Batch batch : deliveryNote.getBatches()) {
+            batchRepository.save(batch);
+        }
+
+        return saveDelivery;
     }
 
     public DeliveryNote updateDeliveryNote(DeliveryNote deliveryNote) {
