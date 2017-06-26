@@ -141,7 +141,8 @@ public class BatchService {
         boolean found = false;
         for(Batch b : allCommissionBatches)
         {
-            if(!b.getDelivered().equals("true") && !b.getDelivered().equals("ready"))
+            if(!b.isDelivered() && !b.isReady())
+//                if(!b.getStatus().equals("true") && !b.getStatus().equals("ready"))
                 found = true;
 
         }

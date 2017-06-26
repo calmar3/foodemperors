@@ -1,5 +1,6 @@
 package com.isssr.foodemperors.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
@@ -33,8 +34,15 @@ public class Batch {
     @JsonProperty
     private Integer quantity;
 
+    /**
+     * STATUS:
+     * 0 - Not Delivered
+     * 1 - Ready
+     * 2 - Delivered
+     * 3 - Signaled
+     */
     @JsonProperty
-    private String delivered;
+    private Integer status;
 
     @JsonProperty
     @ManyToOne
@@ -55,13 +63,13 @@ public class Batch {
 
 
     public Batch (Product product, String expDate, String delDate, Integer quantity,
-                  Commission commission,String delivered,Integer number,Double price) {
+                  Commission commission, Integer status, Integer number, Double price) {
         this.product = product;
         this.expDate = expDate;
         this.delDate = delDate;
         this.quantity = quantity;
         this.commission = commission;
-        this.delivered = delivered;
+        this.status = status;
         this.number = number;
         this.price = price;
     }
@@ -115,12 +123,12 @@ public class Batch {
         this.commission = commission;
     }
 
-    public String getDelivered() {
-        return delivered;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setDelivered(String delivered) {
-        this.delivered = delivered;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
 
@@ -149,13 +157,21 @@ public class Batch {
         this.remaining = remaining;
     }
 
+    @JsonIgnore
     public boolean isDelivered()
     {
-        if(delivered.equals("true"))
+        if(status == 2)
             return true;
         else
             return false;
-
     }
 
+    @JsonIgnore
+    public boolean isReady()
+    {
+        if(status == 1)
+            return true;
+        else
+            return false;
+    }
 }

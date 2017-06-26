@@ -29,6 +29,9 @@ public class BatchEndpoint {
     @Inject
     BatchService batchService;
 
+    @Inject
+    BatchRepository batchRepository;
+
     /**
      * Salva i batches aggiornati e restituisce il commissionDTO con la commission aggiornata
      */
@@ -51,6 +54,4 @@ public class BatchEndpoint {
 
         return batchService.sendBatches(batches);
     }
-
-
 }
