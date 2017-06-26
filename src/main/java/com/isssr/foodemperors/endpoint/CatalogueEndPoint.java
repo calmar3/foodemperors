@@ -1,6 +1,7 @@
 package com.isssr.foodemperors.endpoint;
 
 import com.isssr.foodemperors.model.Catalogue;
+import com.isssr.foodemperors.service.CatalogueService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,18 +14,15 @@ import java.util.List;
 /**
  * Created by simone on 09/06/17.
  */
+@RestController
 @CrossOrigin(origins = "*")
 public class CatalogueEndPoint {
 
     @Inject
-    CatalogueRepository catalogueRepository;
+    private CatalogueService catalogueService;
 
     @RequestMapping(path = "api/catalogue", method = RequestMethod.GET)
     public List<Catalogue> getCatalogue() {
-        return catalogueRepository.findAll();
-
+        return catalogueService.getCatalogue();
     }
-
-
-
 }
