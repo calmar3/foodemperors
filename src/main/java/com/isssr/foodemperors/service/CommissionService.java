@@ -1,12 +1,15 @@
 package com.isssr.foodemperors.service;
 
+import com.isssr.foodemperors.dto.CommissionDTO;
 import com.isssr.foodemperors.model.Batch;
 import com.isssr.foodemperors.model.Commission;
-import org.springframework.stereotype.Service;
 import com.isssr.foodemperors.repository.BatchRepository;
 import com.isssr.foodemperors.repository.CommissionRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,5 +50,32 @@ public class CommissionService {
                 batchRepository.deleteById(batch.getId());
         }
         return comm;
+    }
+
+    public CommissionDTO searchCommissionByNumber(String number) {
+        Commission commission = commissionRepository.findByNumber(number);
+        CommissionDTO commissionDTO = new CommissionDTO();
+        commissionDTO.setCommission(commission);
+        commissionDTO.setBatches(batchRepository.findByCommissionId(commission.getId()));
+        return commissionDTO;
+
+    }
+
+    public List<CommissionDTO> getAllCommissions() {
+        List<Commission> commissions = commissionRepository.findAll();
+        List<CommissionDTO> dtoCommissions = new ArrayList<>();
+        for (Commission cms: commissions){
+            CommissionDTO cDTO = new CommissionDTO();
+            cDTO.setCommission(cms);
+            cDTO.setBatches(batchRepository.findByCommissionId(cms.getId()));
+            dtoCommissions.add(cDTO);
+        }
+        return dtoCommissions;
+    }
+
+    public Long deleteCommission(@PathVariable String id) {
+
+        batchRepository.deleteByCommissionId(id);
+        return commissionRepository.deleteById(id);
     }
 }
