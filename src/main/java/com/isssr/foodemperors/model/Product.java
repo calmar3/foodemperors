@@ -58,18 +58,17 @@ public class Product {
     @JsonProperty
     private Float charge;
 
-
-
     @JsonProperty
-    private Integer pack;
+    @Embedded
+    private List<Integer> pack;
 
     public Product() {
 
     }
 
     public Product (String name, String averageDeliveryTime, String stockist, String price,
-                    HashMap<String, String> properties,Category category,String description,
-                    List<Property> propertylist,Float charge,Integer pack) {
+                    HashMap<String, String> properties, Category category, String description,
+                    List<Property> propertylist, Float charge, List<Integer> pack) {
         this.name = name;
         this.averageDeliveryTime = averageDeliveryTime;
         this.stockist = stockist;
@@ -186,11 +185,11 @@ public class Product {
         this.charge = charge;
     }
 
-    public Integer getPack() {
+    public List<Integer> getPack() {
         return pack;
     }
 
-    public void setPack(Integer pack) {
+    public void setPack(List<Integer> pack) {
         this.pack = pack;
     }
 }
