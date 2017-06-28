@@ -27,10 +27,6 @@ public class Batch {
     @JsonProperty
     private String delDate;
 
-
-    @JsonProperty
-    private Integer remaining;
-
     @JsonProperty
     private Integer quantity;
 
@@ -53,8 +49,15 @@ public class Batch {
     @JsonProperty
     private Integer number;
 
+
+    @JsonProperty
+    private Integer remaining;
+
     @JsonProperty
     private Double price;
+
+    @JsonProperty
+    private Double sale;
 
 
     public Batch () {
@@ -63,7 +66,9 @@ public class Batch {
 
 
     public Batch (Product product, String expDate, String delDate, Integer quantity,
-                  Commission commission, Integer status, Integer number, Double price) {
+                  Commission commission, Integer status, Integer number, Double price,
+                  Integer remaining,Double sale) {
+
         this.product = product;
         this.expDate = expDate;
         this.delDate = delDate;
@@ -72,6 +77,8 @@ public class Batch {
         this.status = status;
         this.number = number;
         this.price = price;
+        this.remaining = remaining;
+        this.sale = sale;
     }
 
 
@@ -148,7 +155,6 @@ public class Batch {
         return this.number;
     }
 
-
     public Integer getRemaining() {
         return remaining;
     }
@@ -157,21 +163,25 @@ public class Batch {
         this.remaining = remaining;
     }
 
+
+    public Double getSale() {
+        return sale;
+    }
+
+    public void setSale(Double sale) {
+        this.sale = sale;
+    }
+
     @JsonIgnore
     public boolean isDelivered()
     {
-        if(status == 2)
-            return true;
-        else
-            return false;
+        return (status == 2);
     }
 
     @JsonIgnore
     public boolean isReady()
     {
-        if(status == 1)
-            return true;
-        else
-            return false;
+        return (status == 1);
     }
+
 }

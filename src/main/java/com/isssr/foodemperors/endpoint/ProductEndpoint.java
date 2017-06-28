@@ -11,6 +11,7 @@ import java.util.List;
 /**
  * Created by mariusdragosionita on 23/05/17.
  */
+//TODO remove repository
 @RestController
 @CrossOrigin(origins = "*")
 public class ProductEndpoint {
@@ -42,6 +43,10 @@ public class ProductEndpoint {
         return productRepository.findAll();
     }
 
+    @RequestMapping(path = "api/product", method = RequestMethod.PUT)
+    public Product updateProduct(@RequestBody Product product) {
+        return productService.saveProduct(product);
+    }
 
 
 }

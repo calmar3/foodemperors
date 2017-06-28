@@ -53,15 +53,22 @@ public class Product {
     @DBRef
     @JsonProperty
     @JsonIgnore
-    private List<Property> propertyList;
+    private List<Property> propertylist;
+
+    @JsonProperty
+    private Float charge;
+
+    @JsonProperty
+    @Embedded
+    private List<Integer> pack;
 
     public Product() {
 
     }
 
     public Product (String name, String averageDeliveryTime, String stockist, String price,
-                    HashMap<String, String> properties,Category category,String description,
-                    List<Property> propertyList) {
+                    HashMap<String, String> properties, Category category, String description,
+                    List<Property> propertylist, Float charge, List<Integer> pack) {
         this.name = name;
         this.averageDeliveryTime = averageDeliveryTime;
         this.stockist = stockist;
@@ -70,7 +77,9 @@ public class Product {
         this.category = category;
 
         this.description = description;
-        this.propertyList = propertyList;
+        this.propertylist = propertylist;
+        this.charge = charge;
+        this.pack = pack;
 
     }
 
@@ -138,25 +147,25 @@ public class Product {
         this.description = description;
     }
 
-    public List<Property> getPropertyList() {
-        return propertyList;
+    public List<Property> getPropertylist() {
+        return propertylist;
     }
 
-    public void setPropertyList(List<Property> propertyList) {
-        this.propertyList = propertyList;
+    public void setPropertylist(List<Property> propertylist) {
+        this.propertylist = propertylist;
     }
 
 
     @JsonGetter
     public List<String> getPropertiesId() {
         List<String> idList = new ArrayList<>();
-        List<Property> propertyList = getPropertyList();
+        List<Property> propertylist = getPropertylist();
 
-        if(propertyList == null)
+        if(propertylist == null) {
             return null;
+        }
 
-
-        for(Property property : propertyList) {
+        for(Property property : propertylist) {
             if(property != null) {
                 idList.add(property.getId());
             }
@@ -167,5 +176,21 @@ public class Product {
         else {
             return null;
         }
+    }
+
+    public Float getCharge() {
+        return charge;
+    }
+
+    public void setCharge(Float charge) {
+        this.charge = charge;
+    }
+
+    public List<Integer> getPack() {
+        return pack;
+    }
+
+    public void setPack(List<Integer> pack) {
+        this.pack = pack;
     }
 }

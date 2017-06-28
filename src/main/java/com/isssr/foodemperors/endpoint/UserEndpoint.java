@@ -3,7 +3,6 @@ package com.isssr.foodemperors.endpoint;
 import com.isssr.foodemperors.model.User;
 import com.isssr.foodemperors.service.UserService;
 import org.springframework.web.bind.annotation.*;
-import com.isssr.foodemperors.repository.UserRepository;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;

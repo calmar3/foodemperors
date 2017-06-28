@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * Created by olga on 29/05/17.
  */
+//TODO remove repository
 @RestController
 @CrossOrigin(origins = "*")
 public class PeripheralWarehouseEndpoint {

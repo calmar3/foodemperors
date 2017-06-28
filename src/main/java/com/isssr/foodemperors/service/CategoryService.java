@@ -31,4 +31,12 @@ public class CategoryService {
         category.setFather(fatherCategory);
         return categoryRepository.save(category);
     }
+
+    public List<Category> findLeafs(Object o) {
+        return categoryRepository.findBySons(null);
+    }
+
+    public Category findById(String name) {
+        return categoryRepository.findById(name);
+    }
 }

@@ -8,16 +8,14 @@ import com.isssr.foodemperors.repository.CommissionRepository;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by simone on 20/06/17.
+ * Created by marco on 13/06/17.
  */
 @Service
-public class CommissionService{
+public class CommissionService {
 
     @Inject
     private CommissionRepository commissionRepository;
@@ -25,44 +23,44 @@ public class CommissionService{
     @Inject
     private BatchRepository batchRepository;
 
-
-    public Commission saveCommission(CommissionDTO commissionDTO) {
-
-        /**
-         * Control over commission fields
-         */
-        Commission comm = commissionRepository.save(commissionDTO.getCommission());
-        for (Batch batch: commissionDTO.getBatches()){
+    public Commission saveCommission(Commission commission, List<Batch> batches){
+        Commission comm = commissionRepository.save(commission);
+        comm.setCompleted("false");
+        for (Batch batch: batches){
             batch.setCommission(comm);
+            //batch.setStatus(0);
             batchRepository.save(batch);
         }
         return comm;
     }
 
-    public Commission updateCommission(CommissionDTO commissionDTO) {
-        Commission comm = commissionRepository.save(commissionDTO.getCommission());
-        List<Batch> batches = batchRepository.findByCommissionId(comm.getId());
-        for (Batch batch: commissionDTO.getBatches()){
+    public Commission updateCommission(Commission commission,List<Batch> batches){
+        Commission comm = commissionRepository.save(commission);
+        List<Batch> oldBatches = batchRepository.findByCommissionId(comm.getId());
+        for (Batch batch: batches){
             if (batch.getCommission() == null)
                 batch.setCommission(comm);
             batchRepository.save(batch);
         }
-        for (Batch batch : batches){
+        for (Batch batch : oldBatches){
             boolean found = false;
-            for (int i = 0 ; i < commissionDTO.getBatches().size() && !found; i++){
-                found = (batch.getId().equals(commissionDTO.getBatches().get(i).getId()));
+            for (int i = 0 ; i < batches.size() && !found; i++){
+                found = (batch.getId().equals(batches.get(i).getId()));
             }
             if (!found)
                 batchRepository.deleteById(batch.getId());
         }
-        return comm;    }
+        return comm;
+    }
 
-    public CommissionDTO searchCommissionByNumber(int number) {
-        Commission commission = commissionRepository.findByNumber(String.valueOf(number));
+    public CommissionDTO searchCommissionByNumber(String number) {
+        Commission commission = commissionRepository.findByNumber(number);
         CommissionDTO commissionDTO = new CommissionDTO();
         commissionDTO.setCommission(commission);
         commissionDTO.setBatches(batchRepository.findByCommissionId(commission.getId()));
-        return commissionDTO;    }
+        return commissionDTO;
+
+    }
 
     public List<CommissionDTO> getAllCommissions() {
         List<Commission> commissions = commissionRepository.findAll();
@@ -72,16 +70,12 @@ public class CommissionService{
             cDTO.setCommission(cms);
             cDTO.setBatches(batchRepository.findByCommissionId(cms.getId()));
             dtoCommissions.add(cDTO);
-
         }
-        return dtoCommissions;    }
+        return dtoCommissions;
+    }
 
-    public Long deleteCommission(String id, HttpServletRequest request, HttpServletResponse response) {
+    public Long deleteCommission(String id) {
         batchRepository.deleteByCommissionId(id);
-        Long commission =  commissionRepository.deleteById(id);
-        if (commission == 0){
-            response.setStatus(404);
-            return null;
-        }
-        return commission;    }
+        return commissionRepository.deleteById(id);
+    }
 }
