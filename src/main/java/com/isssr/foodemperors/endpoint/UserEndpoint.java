@@ -1,5 +1,6 @@
 package com.isssr.foodemperors.endpoint;
 
+import com.isssr.foodemperors.dto.UserDTO;
 import com.isssr.foodemperors.model.User;
 import com.isssr.foodemperors.service.TokenService;
 import com.isssr.foodemperors.service.UserService;
@@ -40,9 +41,10 @@ public class UserEndpoint {
         if (found == null) {
             response.setStatus(404);
             return new String("User Not Found");
-        } else
-            return tokenService.generateToken(found.getUsername(),found.getRole());
-
+        } else {
+            UserDTO userDTO = new UserDTO(found, tokenService.generateToken(found.getUsername(), found.getRole()));
+            return userDTO;
+        }
     }
 
     @RequestMapping(path = "api/user", method = RequestMethod.PUT)
