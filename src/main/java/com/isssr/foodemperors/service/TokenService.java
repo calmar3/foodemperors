@@ -25,6 +25,8 @@ public class TokenService {
     private UserRepository userRepository;
 
     public TokenPayload validateUser(String token){
+        if (token == null)
+            return null;
         try {
             ObjectMapper mapper = new ObjectMapper();
             TokenPayload decoded = mapper.readValue(Jwts.parser().setSigningKey(AppConfig.key)
