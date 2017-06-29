@@ -167,4 +167,19 @@ public class BatchService {
         }
         return batches;
     }
+
+    public List<Batch> getAllBatches() {
+        List<Batch> batchList = batchRepository.findAll();
+        ArrayList<Batch> whisper = new ArrayList<>();
+
+        Iterator<Batch> iter = batchList.iterator();
+        while (iter.hasNext()) {
+            Batch b = iter.next();
+            if (b.getRemaining() != null)
+                if (b.getCommission().getDestination().equals("FoodEmperors") && b.getRemaining() >= 0)
+                    whisper.add(b);
+        }
+        return whisper;
+    }
+
 }
