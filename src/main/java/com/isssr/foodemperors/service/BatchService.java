@@ -46,7 +46,7 @@ public class BatchService {
                     found = true;
         }
         if (!found) {
-            commission.setCompleted("true");
+            commission.setCompleted(true);
             commissionRepository.save(commission);
         }
         CommissionDTO cDTO = new CommissionDTO(commission,allBatches);
@@ -109,7 +109,7 @@ public class BatchService {
         }
         if(!found)
         {
-            commission.setCompleted("true");
+            commission.setCompleted(true);
             commissionRepository.save(commission);
         }
         //4) Aggiorna BatchesRelation (NOTA: outBatches e inBatches vanno a 2 a 2!)

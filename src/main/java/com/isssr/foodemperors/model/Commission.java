@@ -34,13 +34,13 @@ public class  Commission {
     private String deliveryTime;
 
     @JsonProperty
-    private String completed;
+    private Boolean completed;
 
     public Commission(){
 
     }
 
-    public Commission(String number, String date, String source, String destination, String deliveryTime,String completed) {
+    public Commission(String number, String date, String source, String destination, String deliveryTime,Boolean completed) {
 
         this.number = number;
         this.date = date;
@@ -99,11 +99,11 @@ public class  Commission {
         this.deliveryTime = deliveryTime;
     }
 
-    public String getCompleted() {
+    public Boolean getCompleted() {
         return completed;
     }
 
-    public void setCompleted(String completed) {
+    public void setCompleted(Boolean completed) {
         this.completed = completed;
     }
 }

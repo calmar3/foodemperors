@@ -25,10 +25,10 @@ public class CommissionService {
 
     public Commission saveCommission(Commission commission, List<Batch> batches){
         Commission comm = commissionRepository.save(commission);
-        comm.setCompleted("false");
+        comm.setCompleted(false);
         for (Batch batch: batches){
             batch.setCommission(comm);
-            //batch.setStatus(0);
+            batch.setStatus(0);
             batchRepository.save(batch);
         }
         return comm;
