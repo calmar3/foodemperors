@@ -36,10 +36,19 @@ public class CategoryService {
     public HashMap<String, String> getCategories (String cat) {
         Category category = categoryRepository.findById(cat);
         HashMap<String,String> map = category.getProperties();
-        while (category.getFather()!=null){
+        while (category.getFather() == null){
             category = categoryRepository.findById(category.getFatherId());
             map.putAll(category.getProperties());
         }
         return map;
+    }
+
+    public List<Category> getAllCategories() {
+        List<Category> allCategories = categoryRepository.findAll();
+        return allCategories;
+    }
+
+    public List<Category> getRootsCategories() {
+        return categoryRepository.findByFather(null);
     }
 }

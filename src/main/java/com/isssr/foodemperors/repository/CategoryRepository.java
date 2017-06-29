@@ -14,4 +14,5 @@ public interface CategoryRepository  extends MongoRepository<Category, Long> {
     List<Category> findByFather(String father);
     Category findById(String id);
     List<Category> findBySons (String sons);
+    List<Category> findByFather(Object o);
 }

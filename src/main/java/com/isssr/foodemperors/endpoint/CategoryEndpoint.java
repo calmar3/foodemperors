@@ -48,4 +48,14 @@ public class CategoryEndpoint {
         return categoryService.getCategories(category);
     }
 
+    @RequestMapping(path = "api/categories", method = RequestMethod.GET)
+    public List<Category> getAllCategories(){
+        return categoryService.getAllCategories();
+    }
+
+    @RequestMapping(path = "api/categories/root", method = RequestMethod.GET)
+    public List<Category> findRoots(){
+        return categoryService.getRootsCategories();
+    }
+
 }

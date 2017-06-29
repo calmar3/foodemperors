@@ -94,4 +94,14 @@ public class Category {
         else
             return null;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id='" + id + '\'' +
+                ", properties=" + properties +
+                ", father=" + father +
+                ", sons=" + sons +
+                '}';
+    }
 }

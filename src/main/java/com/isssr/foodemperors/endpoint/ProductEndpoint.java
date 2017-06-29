@@ -6,6 +6,8 @@ import com.isssr.foodemperors.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -22,7 +24,7 @@ public class ProductEndpoint {
     private ProductService productService;
 
 
-    @RequestMapping(path = "api/product", method = RequestMethod.POST)
+    @RequestMapping(path = "api/product/save", method = RequestMethod.POST)
     public Product saveProduct(@RequestBody Product product) {
         return productService.saveProduct(product);
     }
@@ -42,6 +44,22 @@ public class ProductEndpoint {
         return productRepository.findAll();
     }
 
+    @RequestMapping(path = "api/product/{id}", method = RequestMethod.DELETE)
+    public Long deleteProduct(@PathVariable String id, HttpServletRequest request, HttpServletResponse response) {
+
+        Long product =  productRepository.deleteById(id);
+        if (product == 0){
+            response.setStatus(404);
+            return null;
+        }
+        return product;
+    }
+
+    @RequestMapping(path = "api/product/update", method = RequestMethod.PUT)
+    public Product updateProduct(@RequestBody Product product) {
+        /* La funzione save inserisce un elemento se non esiste, altrimenti lo aggiorna */
+        return productRepository.save(product);
+    }
 
 
 }

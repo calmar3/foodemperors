@@ -1,6 +1,7 @@
 package com.isssr.foodemperors.endpoint;
 
 import com.isssr.foodemperors.model.Property;
+import com.isssr.foodemperors.service.PropertyServiceImpl;
 import org.springframework.web.bind.annotation.*;
 import com.isssr.foodemperors.service.spec.PropertyService;
 
@@ -19,7 +20,7 @@ public class PropertyEndPoint {
     private PropertyService propertyService;
 
     @RequestMapping(path = "api/property", method = RequestMethod.POST)
-    public Property saveProperty(@RequestParam Property property) {
+    public Property saveProperty(@RequestBody Property property) {
         return propertyService.saveProperty(property);
     }
 
@@ -32,4 +33,6 @@ public class PropertyEndPoint {
     public Property searchProperty(@PathVariable String name) {
         return propertyService.searchByName(name);
     }
+
+
 }
