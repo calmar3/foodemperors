@@ -46,6 +46,13 @@ public class BatchEndpoint {
 
     }
 
+
+    @RequestMapping(path = "api/batch/getallbatches", method = RequestMethod.GET)
+    public List<Batch> getAllBatches() {
+        return batchService.getAllBatches();
+
+    }
+
     @RequestMapping(path = "api/batch/sendBatches", method = RequestMethod.POST)
     public List<Batch> sendBatches(@RequestBody List<Batch> batches) {
 

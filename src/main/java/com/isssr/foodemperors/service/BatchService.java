@@ -22,7 +22,6 @@ public class BatchService {
     @Inject
     private BatchRepository batchRepository;
 
-
     @Inject
     private CommissionRepository commissionRepository;
 
@@ -76,9 +75,9 @@ public class BatchService {
         return cDTO;
     }
 
+
     public List<Batch> getBatchesByProd(Product product) {
         List<Batch> batchList = batchRepository.findByProductId(product.getId());
-
         ArrayList<Batch> whisper = new ArrayList<>();
 
         Iterator<Batch> iter = batchList.iterator();
@@ -93,8 +92,21 @@ public class BatchService {
         return whisper;
     }
 
-    public List<Batch> sendBatches(List<Batch> batches) {
+    public List<Batch> getAllBatches() {
+        List<Batch> batchList = batchRepository.findAll();
+        ArrayList<Batch> whisper = new ArrayList<>();
 
+        Iterator<Batch> iter = batchList.iterator();
+        while (iter.hasNext()) {
+            Batch b = iter.next();
+            if (b.getRemaining() != null)
+                if (b.getCommission().getDestination().equals("FoodEmperors") && b.getRemaining() >= 0)
+                    whisper.add(b);
+        }
+        return whisper;
+    }
+
+    public List<Batch> sendBatches(List<Batch> batches) {
         List<Batch> ourBatches = new ArrayList<>();
         List<Batch> outBatches = new ArrayList<>();
 
@@ -186,10 +198,6 @@ public class BatchService {
         }
 
         return null;
-
-
-
-
 
     }
 }
