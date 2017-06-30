@@ -10,4 +10,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface PropertyRepository extends MongoRepository<Property, Long>{
 
     Property findById(String id);
+    Long deleteById(String id);
 }

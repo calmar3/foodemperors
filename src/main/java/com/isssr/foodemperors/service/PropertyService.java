@@ -27,4 +27,8 @@ public class PropertyService{
     public Property searchByName(String name) {
         return propertyRepository.findById(name);
     }
+
+    public Long deletePropertyById(String id) {
+        return propertyRepository.deleteById(id);
+    }
 }
