@@ -37,6 +37,18 @@ public class BatchService {
     public CommissionDTO saveBatch(ArrayList<Batch> batches) {
         for (Batch b : batches) {
             batchRepository.save(b);
+
+            //Crea nuova batchesRelation
+
+            BatchesRelation batchesRelation = batchesRelationRepository.findByBatchId(b.getId());
+            if(batchesRelation == null)
+            {
+                batchesRelation = new BatchesRelation();
+                batchesRelation.setBatch(b);
+                batchesRelation.setOutBatches(new ArrayList<>());
+                batchesRelationRepository.save(batchesRelation);
+            }
+
         }
         Commission commission = commissionRepository.findById(batches.get(0).getCommission().getId());
         List<Batch> allBatches = batchRepository.findByCommissionId(commission.getId());
@@ -58,6 +70,12 @@ public class BatchService {
             catalogue.setQuantity(qt + b.getQuantity());
             catalogueRepository.save(catalogue);
         }
+
+
+
+
+
+
         return cDTO;
     }
 
@@ -68,7 +86,7 @@ public class BatchService {
         while (iter.hasNext()) {
             Batch b = iter.next();
             if (b.getRemaining() != null)
-                if (b.getCommission().getDestination().equals("FoodEmperors") && b.getRemaining() >= 0)
+                if (b.getCommission().getSource().equals("FoodEmperors") && b.getRemaining() >= 0)
                     whisper.add(b);
 
         }
@@ -104,7 +122,6 @@ public class BatchService {
         for(Batch b : allCommissionBatches)
         {
             if(!b.isDelivered() && !b.isReady())
-//                if(!b.getStatus().equals("true") && !b.getStatus().equals("ready"))
                 found = true;
         }
         if(!found)
@@ -115,7 +132,6 @@ public class BatchService {
         //4) Aggiorna BatchesRelation (NOTA: outBatches e inBatches vanno a 2 a 2!)
         for(i=0;i<outBatches.size();i++) {
             BatchesRelation batchesRelation = batchesRelationRepository.findByBatch(ourBatches.get(i));
-            System.out.println(batchesRelation);
             List<Batch> outBatch;
             if(batchesRelation == null) {
                 batchesRelation = new BatchesRelation();
