@@ -46,7 +46,7 @@ public class BatchService {
                     found = true;
         }
         if (!found) {
-            commission.setCompleted("true");
+            commission.setCompleted(true);
             commissionRepository.save(commission);
         }
         CommissionDTO cDTO = new CommissionDTO(commission,allBatches);
@@ -109,7 +109,7 @@ public class BatchService {
         }
         if(!found)
         {
-            commission.setCompleted("true");
+            commission.setCompleted(true);
             commissionRepository.save(commission);
         }
         //4) Aggiorna BatchesRelation (NOTA: outBatches e inBatches vanno a 2 a 2!)
@@ -167,4 +167,19 @@ public class BatchService {
         }
         return batches;
     }
+
+    public List<Batch> getAllBatches() {
+        List<Batch> batchList = batchRepository.findAll();
+        ArrayList<Batch> whisper = new ArrayList<>();
+
+        Iterator<Batch> iter = batchList.iterator();
+        while (iter.hasNext()) {
+            Batch b = iter.next();
+            if (b.getRemaining() != null)
+                if (b.getCommission().getDestination().equals("FoodEmperors") && b.getRemaining() >= 0)
+                    whisper.add(b);
+        }
+        return whisper;
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.isssr.foodemperors.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.isssr.foodemperors.model.Product;
 import org.springframework.stereotype.Service;
 import com.isssr.foodemperors.repository.ProductRepository;

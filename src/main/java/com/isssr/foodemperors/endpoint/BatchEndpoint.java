@@ -52,4 +52,10 @@ public class BatchEndpoint {
     public List<Batch> updateBatches(@RequestBody List<Batch> batches){
         return batchService.updateBatches(batches);
     }
+
+    @RequestMapping(path = "api/batch/getallbatches", method = RequestMethod.GET)
+    public List<Batch> getAllBatches() {
+        return batchService.getAllBatches();
+
+    }
 }

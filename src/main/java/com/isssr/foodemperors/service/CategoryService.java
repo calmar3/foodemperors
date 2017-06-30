@@ -6,6 +6,7 @@ import com.isssr.foodemperors.repository.CategoryRepository;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -30,6 +31,25 @@ public class CategoryService {
         categoryRepository.save(fatherCategory);
         category.setFather(fatherCategory);
         return categoryRepository.save(category);
+    }
+
+    public HashMap<String, String> getCategories (String cat) {
+        Category category = categoryRepository.findById(cat);
+        HashMap<String,String> map = category.getProperties();
+        while (category.getFather() == null){
+            category = categoryRepository.findById(category.getFatherId());
+            map.putAll(category.getProperties());
+        }
+        return map;
+    }
+
+    public List<Category> getAllCategories() {
+        List<Category> allCategories = categoryRepository.findAll();
+        return allCategories;
+    }
+
+    public List<Category> getRootsCategories() {
+        return categoryRepository.findByFather(null);
     }
 
     public List<Category> findLeafs(Object o) {
