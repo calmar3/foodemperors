@@ -120,4 +120,16 @@ public class BatchEndpoint {
         }
 
     }
+
+
+    //API PER POS
+    @RequestMapping(path = "api/pos/decreaseBatch/{id}", method = RequestMethod.GET)
+    public Batch decreaseBatch(@PathVariable("id") String id,
+                               @RequestParam("quantity") int quantity)
+    {
+
+        return batchService.decreaseBatch(id,quantity);
+    }
+
+
 }
