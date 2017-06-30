@@ -50,7 +50,7 @@ public class UserEndpoint {
     @RequestMapping(path = "api/user", method = RequestMethod.PUT)
     public User updateUser(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
-        if (tokenPayload != null && tokenPayload.getRole().equals("admin"))
+        if (tokenPayload != null)
             return userService.updateUser(user);
         else{
             response.setStatus(401);
