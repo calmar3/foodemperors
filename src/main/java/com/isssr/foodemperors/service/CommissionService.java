@@ -63,6 +63,7 @@ public class CommissionService {
     }
 
     public List<CommissionDTO> getAllCommissions() {
+
         List<Commission> commissions = commissionRepository.findAll();
         List<CommissionDTO> dtoCommissions = new ArrayList<>();
         for (Commission cms: commissions){
@@ -71,6 +72,7 @@ public class CommissionService {
             cDTO.setBatches(batchRepository.findByCommissionId(cms.getId()));
             dtoCommissions.add(cDTO);
         }
+
         return dtoCommissions;
     }
 
