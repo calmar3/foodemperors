@@ -4,9 +4,13 @@ import com.isssr.foodemperors.dto.CommissionDTO;
 import com.isssr.foodemperors.model.Batch;
 import com.isssr.foodemperors.model.Product;
 import com.isssr.foodemperors.service.BatchService;
+import com.isssr.foodemperors.service.TokenService;
+import com.isssr.foodemperors.utils.TokenPayload;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,45 +21,91 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
+//TODO check users permissions
 public class BatchEndpoint {
 
 
     @Inject
     private BatchService batchService;
 
+    @Inject
+    private TokenService tokenService;
+
     /**
      *  Salva i batches aggiornati e restituisce il commissionDTO con la commission aggiornata
      */
     @RequestMapping(path = "api/batch/saveBatches", method = RequestMethod.POST)
-    public CommissionDTO saveBatch(@RequestBody ArrayList<Batch> batches) {
-        return batchService.saveBatch(batches);
+    public CommissionDTO saveBatch(@RequestBody ArrayList<Batch> batches, HttpServletRequest request, HttpServletResponse response) {
+        TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
+        if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+            return batchService.saveBatch(batches);
+        else{
+            response.setStatus(401);
+            return null;
+        }
     }
 
     @RequestMapping(path = "api/batch/getbatchesbyprod", method = RequestMethod.POST)
-    public List<Batch> getBatchesByProd(@RequestBody Product product) {
-        return batchService.getBatchesByProd(product);
+    public List<Batch> getBatchesByProd(@RequestBody Product product, HttpServletRequest request, HttpServletResponse response) {
+        TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
+        if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+            return batchService.getBatchesByProd(product);
+        else{
+            response.setStatus(401);
+            return null;
+        }
 
     }
 
     @RequestMapping(path = "api/batch/sendBatches", method = RequestMethod.POST)
-    public List<Batch> sendBatches(@RequestBody List<Batch> batches) {
-        return batchService.sendBatches(batches);
+    public List<Batch> sendBatches(@RequestBody List<Batch> batches, HttpServletRequest request, HttpServletResponse response) {
+        TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
+        if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+            return batchService.sendBatches(batches);
+        else{
+            response.setStatus(401);
+            return null;
+        }
     }
 
 
     @RequestMapping(path = "api/batches/expiring", method = RequestMethod.GET)
-    public List<Batch> getExpiringBatches(){
-        return batchService.getExpiringBatches();
+    public List<Batch> getExpiringBatches(HttpServletRequest request, HttpServletResponse response){
+        TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
+        if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+            return batchService.getExpiringBatches();
+        else{
+            response.setStatus(401);
+            return null;
+        }
     }
 
     @RequestMapping(path = "api/batches", method = RequestMethod.PUT)
-    public List<Batch> updateBatches(@RequestBody List<Batch> batches){
-        return batchService.updateBatches(batches);
+    public List<Batch> updateBatches(@RequestBody List<Batch> batches, HttpServletRequest request, HttpServletResponse response){
+        TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
+        if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+            return batchService.updateBatches(batches);
+        else{
+            response.setStatus(401);
+            return null;
+        }
     }
 
     @RequestMapping(path = "api/batch/getallbatches", method = RequestMethod.GET)
-    public List<Batch> getAllBatches() {
-        return batchService.getAllBatches();
+    public List<Batch> getAllBatches(HttpServletRequest request, HttpServletResponse response) {
+        TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
+        if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+            return batchService.getAllBatches();
+        else{
+            response.setStatus(401);
+            return null;
+        }
 
     }
 }

@@ -3,6 +3,8 @@ package com.isssr.foodemperors.endpoint;
 import com.isssr.foodemperors.dto.CommissionDTO;
 import com.isssr.foodemperors.model.Commission;
 import com.isssr.foodemperors.service.CommissionService;
+import com.isssr.foodemperors.service.TokenService;
+import com.isssr.foodemperors.utils.TokenPayload;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -20,30 +22,69 @@ public class CommissionEndpoint {
     @Inject
     private CommissionService commissionService;
 
+    @Inject
+    private TokenService tokenService;
+
     @RequestMapping(path = "api/commission", method = RequestMethod.POST)
-    public Commission saveCommission(@RequestBody CommissionDTO commissionDTO) {
-        return commissionService.saveCommission(commissionDTO.getCommission(),commissionDTO.getBatches());
+    public Commission saveCommission(@RequestBody CommissionDTO commissionDTO,HttpServletRequest request, HttpServletResponse response) {
+        TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
+        if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
+                || tokenPayload.getRole().equals("manager")))
+            return  commissionService.saveCommission(commissionDTO.getCommission(),commissionDTO.getBatches());
+        else{
+            response.setStatus(401);
+            return null;
+        }
     }
 
     @RequestMapping(path = "api/commission", method = RequestMethod.PUT)
-    public Commission updateCommission(@RequestBody CommissionDTO commissionDTO) {
-        return commissionService.updateCommission(commissionDTO.getCommission(),commissionDTO.getBatches());
+    public Commission updateCommission(@RequestBody CommissionDTO commissionDTO,HttpServletRequest request, HttpServletResponse response) {
+        TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
+        if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
+                || tokenPayload.getRole().equals("manager")))
+            return commissionService.updateCommission(commissionDTO.getCommission(),commissionDTO.getBatches());
+        else{
+            response.setStatus(401);
+            return null;
+        }
     }
 
 
     @RequestMapping(path = "api/commission/findby/number/{number}", method = RequestMethod.GET)
-    public CommissionDTO searchCommissionByNumber(@PathVariable int number) {
-        return commissionService.searchCommissionByNumber(String.valueOf(number));
+    public CommissionDTO searchCommissionByNumber(@PathVariable int number,HttpServletRequest request, HttpServletResponse response) {
+        TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
+        if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+            return commissionService.searchCommissionByNumber(String.valueOf(number));
+        else{
+            response.setStatus(401);
+            return null;
+        }
 
     }
 
     @RequestMapping(path = "api/commissions", method = RequestMethod.GET)
-    public List<CommissionDTO> getAllCommissions() {
-        return commissionService.getAllCommissions();
+    public List<CommissionDTO> getAllCommissions(HttpServletRequest request, HttpServletResponse response) {
+        TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
+        if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+            return commissionService.getAllCommissions();
+        else{
+            response.setStatus(401);
+            return null;
+        }
     }
 
     @RequestMapping(path = "api/commission/{id}", method = RequestMethod.DELETE)
     public Long deleteCommission(@PathVariable String id, HttpServletRequest request, HttpServletResponse response) {
-        return commissionService.deleteCommission(id);
+        TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
+        if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
+                || tokenPayload.getRole().equals("manager")))
+            return commissionService.deleteCommission(id);
+        else{
+            response.setStatus(401);
+            return null;
+        }
+
     }
 }

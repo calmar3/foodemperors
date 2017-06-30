@@ -1,10 +1,8 @@
 package com.isssr.foodemperors.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.isssr.foodemperors.model.Product;
-import org.springframework.stereotype.Service;
 import com.isssr.foodemperors.repository.ProductRepository;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -44,6 +42,18 @@ public class ProductService {
             }
         }
         return products;
+    }
+
+    public List<Product> findProductByName(String name){
+        return productRepository.findByName(name);
+    }
+
+    public List<Product> findAllProducts(){
+        return productRepository.findAll();
+    }
+
+    public Long deleteProductById(String id){
+        return productRepository.deleteById(id);
     }
 
 }

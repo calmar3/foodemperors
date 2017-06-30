@@ -1,5 +1,6 @@
 package com.isssr.foodemperors.endpoint;
 
+import com.isssr.foodemperors.dto.UserDTO;
 import com.isssr.foodemperors.model.User;
 import com.isssr.foodemperors.service.TokenService;
 import com.isssr.foodemperors.service.UserService;
@@ -24,8 +25,14 @@ public class UserEndpoint {
     private TokenService tokenService;
 
     @RequestMapping(path = "api/user", method = RequestMethod.POST)
-    public User saveUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    public User saveUser(@RequestBody User user,HttpServletRequest request, HttpServletResponse response) {
+        TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
+        if (tokenPayload != null && tokenPayload.getRole().equals("admin"))
+            return userService.saveUser(user);
+        else{
+            response.setStatus(401);
+            return null;
+        }
     }
 
     @RequestMapping(path = "api/user/login", method = RequestMethod.POST)
@@ -34,15 +41,16 @@ public class UserEndpoint {
         if (found == null) {
             response.setStatus(404);
             return new String("User Not Found");
-        } else
-            return tokenService.generateToken(found.getUsername(),found.getRole());
-
+        } else {
+            UserDTO userDTO = new UserDTO(found, tokenService.generateToken(found.getUsername(), found.getRole()));
+            return userDTO;
+        }
     }
 
     @RequestMapping(path = "api/user", method = RequestMethod.PUT)
     public User updateUser(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
-        if (tokenPayload.getRole().equals("admin"))
+        if (tokenPayload != null)
             return userService.updateUser(user);
         else{
             response.setStatus(401);
