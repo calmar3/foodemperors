@@ -117,4 +117,18 @@ public class PeripheralWarehouse {
     public void setPIVA(String PIVA) {
         this.pIVA = pIVA;
     }
+
+    @Override
+    public String toString() {
+        return "PeripheralWarehouse{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", serverAddress='" + serverAddress + '\'' +
+                ", warehouseManager='" + warehouseManager + '\'' +
+                ", employeesNumbers=" + employeesNumbers +
+                ", pIVA='" + pIVA + '\'' +
+                '}';
+    }
 }

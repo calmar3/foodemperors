@@ -93,7 +93,7 @@ public class BatchService {
         return whisper;
     }
 
-    public List<Batch> sendBatches(List<Batch> batches) {
+    public CommissionDTO sendBatches(List<Batch> batches) {
         List<Batch> ourBatches = new ArrayList<>();
         List<Batch> outBatches = new ArrayList<>();
         int i = 0;
@@ -105,8 +105,9 @@ public class BatchService {
             i++;
         }
         //Aggiorna batch in uscita + Diminuisce catalogo di quella quantità
+        List<Batch> retBatches = new ArrayList<>();
         for(Batch b : outBatches){
-            batchRepository.save(b);
+            retBatches.add(batchRepository.save(b));
             Catalogue c = catalogueRepository.findByProductId(b.getProduct().getId());
             c.setQuantity(c.getQuantity() - b.getQuantity());
             catalogueRepository.save(c);
@@ -124,10 +125,11 @@ public class BatchService {
             if(!b.isDelivered() && !b.isReady())
                 found = true;
         }
+        Commission retCommission = null;
         if(!found)
         {
             commission.setCompleted(true);
-            commissionRepository.save(commission);
+            retCommission = commissionRepository.save(commission);
         }
         //4) Aggiorna BatchesRelation (NOTA: outBatches e inBatches vanno a 2 a 2!)
         for(i=0;i<outBatches.size();i++) {
@@ -144,7 +146,7 @@ public class BatchService {
             batchesRelation.setOutBatches(outBatch);
             batchesRelationRepository.save(batchesRelation);
         }
-        return null;
+        return new CommissionDTO(retCommission,retBatches);
     }
 
     public List<Batch> updateBatches(List<Batch> batches){

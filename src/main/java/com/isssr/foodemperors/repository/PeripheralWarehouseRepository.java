@@ -17,5 +17,7 @@ public interface PeripheralWarehouseRepository extends MongoRepository<Periphera
     PeripheralWarehouse findById(String id);
     Long deleteById(String Id);
     PeripheralWarehouse findByPIVA(String source);
+
+    PeripheralWarehouse findByName(String name);
 }
 

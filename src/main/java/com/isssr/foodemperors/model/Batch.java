@@ -179,8 +179,7 @@ public class Batch {
     }
 
     @JsonIgnore
-    public boolean isReady()
-    {
+    public boolean isReady() {
         return (status == 1);
     }
 

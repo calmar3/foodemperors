@@ -60,8 +60,8 @@ public class CategoryEndpoint {
                 || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return categoryService.findLeafs(null);
         else {
-            response.setStatus(401);
-            return null;
+            //response.setStatus(401);
+            return categoryService.findLeafs(null);
         }
     }
 
