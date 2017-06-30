@@ -54,7 +54,7 @@ public class CommissionEndpoint {
     public CommissionDTO searchCommissionByNumber(@PathVariable int number,HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return commissionService.searchCommissionByNumber(String.valueOf(number));
         else{
             response.setStatus(401);
@@ -67,7 +67,7 @@ public class CommissionEndpoint {
     public List<CommissionDTO> getAllCommissions(HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return commissionService.getAllCommissions();
         else{
             response.setStatus(401);

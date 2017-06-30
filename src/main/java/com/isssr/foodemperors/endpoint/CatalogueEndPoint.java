@@ -31,7 +31,7 @@ public class CatalogueEndPoint {
     public List<Catalogue> getCatalogue(HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return catalogueService.getCatalogue();
         else{
             response.setStatus(401);

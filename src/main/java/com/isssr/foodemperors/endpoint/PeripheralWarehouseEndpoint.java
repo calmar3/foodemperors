@@ -30,7 +30,7 @@ public class PeripheralWarehouseEndpoint {
     public PeripheralWarehouse savePeripheralWarehouse(@RequestBody PeripheralWarehouseDTO peripheralWarehouseDTO,HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return peripheralWarehouseService.savePeripheralWarehouse(peripheralWarehouseDTO.getPeripheralWarehouse());
         else{
             response.setStatus(401);
@@ -43,7 +43,7 @@ public class PeripheralWarehouseEndpoint {
     public PeripheralWarehouse updatePeripheralWarehouse(@RequestBody PeripheralWarehouseDTO peripheralWarehouseDTO,HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return peripheralWarehouseService.updatePeripheralWarehouse(peripheralWarehouseDTO.getPeripheralWarehouse());
         else{
             response.setStatus(401);
@@ -55,7 +55,7 @@ public class PeripheralWarehouseEndpoint {
     public List<PeripheralWarehouseDTO> searchAll(HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return peripheralWarehouseService.findAllPW();
         else{
             response.setStatus(401);
@@ -67,7 +67,7 @@ public class PeripheralWarehouseEndpoint {
     public PeripheralWarehouseDTO searchPeripheralWarehouse(@PathVariable int id,HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return peripheralWarehouseService.findPWById(String.valueOf(id));
         else{
             response.setStatus(401);
@@ -79,7 +79,7 @@ public class PeripheralWarehouseEndpoint {
     public Long deleteCommission(@PathVariable String id, HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman"))){
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman"))){
             Long peripheralWarehouse =  peripheralWarehouseService.deletePWById(id);
             if (peripheralWarehouse == 0){
                 response.setStatus(404);

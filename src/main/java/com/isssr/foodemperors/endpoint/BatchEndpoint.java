@@ -38,7 +38,7 @@ public class BatchEndpoint {
     public CommissionDTO saveBatch(@RequestBody ArrayList<Batch> batches, HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return batchService.saveBatch(batches);
         else{
             response.setStatus(401);
@@ -50,7 +50,7 @@ public class BatchEndpoint {
     public List<Batch> getBatchesByProd(@RequestBody Product product, HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return batchService.getBatchesByProd(product);
         else{
             response.setStatus(401);
@@ -63,7 +63,7 @@ public class BatchEndpoint {
     public List<Batch> sendBatches(@RequestBody List<Batch> batches, HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return batchService.sendBatches(batches);
         else{
             response.setStatus(401);
@@ -76,7 +76,7 @@ public class BatchEndpoint {
     public List<Batch> getExpiringBatches(HttpServletRequest request, HttpServletResponse response){
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return batchService.getExpiringBatches();
         else{
             response.setStatus(401);
@@ -88,7 +88,7 @@ public class BatchEndpoint {
     public List<Batch> updateBatches(@RequestBody List<Batch> batches, HttpServletRequest request, HttpServletResponse response){
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return batchService.updateBatches(batches);
         else{
             response.setStatus(401);
@@ -100,7 +100,7 @@ public class BatchEndpoint {
     public List<Batch> getAllBatches(HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return batchService.getAllBatches();
         else{
             response.setStatus(401);

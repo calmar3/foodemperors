@@ -41,7 +41,7 @@ public class PropertyEndPoint {
     public List<Property> searchAll(HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return propertyService.searchAll();
         else{
             response.setStatus(401);
@@ -54,7 +54,7 @@ public class PropertyEndPoint {
     public Property searchProperty(@PathVariable String name,HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return propertyService.searchByName(name);
         else{
             response.setStatus(401);

@@ -29,7 +29,7 @@ public class DeliveryNoteEndPoint {
     public List<DeliveryNote> searchAll(HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return deliveryNoteService.searchAll();
         else{
             response.setStatus(401);
@@ -41,7 +41,7 @@ public class DeliveryNoteEndPoint {
     public DeliveryNote saveDeliveryNote(@RequestBody DeliveryNote deliveryNote, HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return deliveryNoteService.saveDeliveryNote(deliveryNote);
         else{
             response.setStatus(401);
@@ -53,7 +53,7 @@ public class DeliveryNoteEndPoint {
     public DeliveryNote updateDeliveryNote(@RequestBody DeliveryNote deliveryNote, HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return deliveryNoteService.updateDeliveryNote(deliveryNote);
         else{
             response.setStatus(401);
@@ -65,7 +65,7 @@ public class DeliveryNoteEndPoint {
     public DeliveryNote deleteDeliveryNote(@RequestBody DeliveryNote deliveryNote, HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return deliveryNoteService.deleteDeliveryNote(deliveryNote);
         else{
             response.setStatus(401);
@@ -77,7 +77,7 @@ public class DeliveryNoteEndPoint {
     public DeliveryNote searchById(@RequestParam String id, HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return deliveryNoteService.searchById(id);
         else{
             response.setStatus(401);

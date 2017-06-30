@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.io.IOException;
+import java.util.Calendar;
 
 /**
  * Created by marco on 29/06/17.
@@ -55,9 +56,12 @@ public class TokenService {
         TokenPayload tokenPayload = new TokenPayload(username,password);
         try {
             String payloadString = mapper.writeValueAsString(tokenPayload);
+            Calendar c = Calendar.getInstance();
+            c.add(Calendar.DATE, 5);
             String compactJws = Jwts.builder()
                     .setSubject(payloadString)
                     .signWith(SignatureAlgorithm.HS512, AppConfig.key)
+                    .setExpiration(c.getTime())
                     .compact();
             return compactJws;
         } catch (JsonProcessingException e) {

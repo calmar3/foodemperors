@@ -43,7 +43,7 @@ public class ProductEndpoint {
     public List<Product> searchProduct(@PathVariable String name,HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return productService.findProductByName(name);
         else{
             response.setStatus(401);
@@ -55,7 +55,7 @@ public class ProductEndpoint {
     public List<Product> searchProductByProperties(@PathVariable String strings,HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("wharehouseman")))
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return productService.getByCategoryAndProperties(strings);
         else{
             response.setStatus(401);
