@@ -75,6 +75,7 @@ public class CommissionEndpoint {
         }
     }
 
+
     @RequestMapping(path = "api/commission/{id}", method = RequestMethod.DELETE)
     public Long deleteCommission(@PathVariable String id, HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
@@ -85,6 +86,17 @@ public class CommissionEndpoint {
             response.setStatus(401);
             return null;
         }
-
     }
+
+    @RequestMapping(path = "api/pos/commission", method = RequestMethod.POST)
+    public CommissionDTO createIncomingCommission(@RequestBody CommissionDTO commissionDTO,HttpServletRequest request, HttpServletResponse response){
+        CommissionDTO responseDTO = commissionService.createIncomingCommission(commissionDTO.getCommission(),commissionDTO.getBatches());
+        if (responseDTO == null){
+            response.setStatus(403);
+            return null;
+        }
+        return responseDTO;
+    }
+
+
 }

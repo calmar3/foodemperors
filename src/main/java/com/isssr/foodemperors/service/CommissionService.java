@@ -3,8 +3,10 @@ package com.isssr.foodemperors.service;
 import com.isssr.foodemperors.dto.CommissionDTO;
 import com.isssr.foodemperors.model.Batch;
 import com.isssr.foodemperors.model.Commission;
+import com.isssr.foodemperors.model.PeripheralWarehouse;
 import com.isssr.foodemperors.repository.BatchRepository;
 import com.isssr.foodemperors.repository.CommissionRepository;
+import com.isssr.foodemperors.repository.PeripheralWarehouseRepository;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -23,9 +25,12 @@ public class CommissionService {
     @Inject
     private BatchRepository batchRepository;
 
+    @Inject
+    private PeripheralWarehouseRepository peripheralWarehouseRepository;
+
     public Commission saveCommission(Commission commission, List<Batch> batches){
+        commission.setCompleted(false);
         Commission comm = commissionRepository.save(commission);
-        comm.setCompleted(false);
         for (Batch batch: batches){
             batch.setCommission(comm);
             batch.setStatus(0);
@@ -79,5 +84,27 @@ public class CommissionService {
     public Long deleteCommission(String id) {
         batchRepository.deleteByCommissionId(id);
         return commissionRepository.deleteById(id);
+    }
+
+    public CommissionDTO createIncomingCommission(Commission commission, List<Batch> batches) {
+        PeripheralWarehouse peripheralWarehouse = peripheralWarehouseRepository.findByPIVA(commission.getSource());
+        if (peripheralWarehouse == null)
+            return null;
+        else{
+            commission.setSource(peripheralWarehouse.getName());
+            commission.setCompleted(false);
+            Commission comm = commissionRepository.save(commission);
+            CommissionDTO commissionDTO = new CommissionDTO();
+            commissionDTO.setCommission(comm);
+            commissionDTO.setBatches(new ArrayList<>());
+            for (Batch batch: batches){
+                batch.setCommission(comm);
+                batch.setStatus(0);
+                Batch temp = batchRepository.save(batch);
+                commissionDTO.getBatches().add(temp);
+            }
+            return commissionDTO;
+        }
+
     }
 }
