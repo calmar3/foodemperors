@@ -94,4 +94,11 @@ public class PeripheralWarehouseEndpoint {
 
     }
 
+    @RequestMapping(path = "api/DataAnalysis/peripheralWarehouse", method = RequestMethod.GET)
+    public List<PeripheralWarehouseDTO> searchAllPW() {
+            return peripheralWarehouseService.findAllPW();
+
+    }
+
+
 }
