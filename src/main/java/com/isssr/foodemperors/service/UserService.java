@@ -5,6 +5,7 @@ import com.isssr.foodemperors.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Created by Caim03 on 26/06/17.
@@ -26,5 +27,13 @@ public class UserService {
 
     public User updateUser(User user) {
         return userRepository.save(user);
+    }
+
+    public Long deleteUser(String id) {
+        return userRepository.deleteById(id);
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }

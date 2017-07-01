@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by marco on 19/05/17.
@@ -58,4 +59,25 @@ public class UserEndpoint {
         }
     }
 
+    @RequestMapping(path = "api/user/{id}", method = RequestMethod.DELETE)
+    public Long deleteUser(@PathVariable String id, HttpServletRequest request, HttpServletResponse response) {
+        TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
+        if (tokenPayload != null && tokenPayload.getRole().equals("admin"))
+            return userService.deleteUser(id);
+        else{
+            response.setStatus(401);
+            return null;
+        }
+    }
+
+    @RequestMapping(path = "api/user", method = RequestMethod.GET)
+    public List<User> findAll(HttpServletRequest request, HttpServletResponse response) {
+        TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
+        if (tokenPayload != null && tokenPayload.getRole().equals("admin"))
+            return userService.findAll();
+        else {
+            response.setStatus(401);
+            return null;
+        }
+    }
 }
