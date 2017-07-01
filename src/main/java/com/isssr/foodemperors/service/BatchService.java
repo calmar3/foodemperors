@@ -70,12 +70,6 @@ public class BatchService {
             catalogue.setQuantity(qt + b.getQuantity());
             catalogueRepository.save(catalogue);
         }
-
-
-
-
-
-
         return cDTO;
     }
 
@@ -125,11 +119,11 @@ public class BatchService {
             if(!b.isDelivered() && !b.isReady())
                 found = true;
         }
-        Commission retCommission = null;
+        CommissionDTO commissionDTO = new CommissionDTO(commission,retBatches);
         if(!found)
         {
             commission.setCompleted(true);
-            retCommission = commissionRepository.save(commission);
+            commissionRepository.save(commission);
         }
         //4) Aggiorna BatchesRelation (NOTA: outBatches e inBatches vanno a 2 a 2!)
         for(i=0;i<outBatches.size();i++) {
@@ -146,7 +140,8 @@ public class BatchService {
             batchesRelation.setOutBatches(outBatch);
             batchesRelationRepository.save(batchesRelation);
         }
-        return new CommissionDTO(retCommission,retBatches);
+        commissionDTO.getCommission().setCompleted(false);
+        return commissionDTO;
     }
 
     public List<Batch> updateBatches(List<Batch> batches){
@@ -193,27 +188,11 @@ public class BatchService {
         Iterator<Batch> iter = batchList.iterator();
         while (iter.hasNext()) {
             Batch b = iter.next();
-            if (b.getRemaining() != null)
+            if (b!=null && b.getRemaining() != null)
                 if (b.getCommission().getDestination().equals("FoodEmperors") && b.getRemaining() >= 0)
                     whisper.add(b);
         }
         return whisper;
     }
 
-    public Batch decreaseBatch(String id, int quantity) {
-
-       Batch b = batchRepository.findById(id);
-
-       if(b != null)
-       {
-           b.setRemaining(b.getRemaining()-quantity);
-
-           batchRepository.save(b);
-
-           return b;
-       }
-       else
-           return null;
-
-    }
 }
