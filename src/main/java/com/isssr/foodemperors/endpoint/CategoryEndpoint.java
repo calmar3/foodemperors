@@ -60,8 +60,8 @@ public class CategoryEndpoint {
                 || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return categoryService.findLeafs(null);
         else {
-            //response.setStatus(401);
-            return categoryService.findLeafs(null);
+            response.setStatus(401);
+            return null;
         }
     }
 
@@ -100,6 +100,11 @@ public class CategoryEndpoint {
             response.setStatus(401);
             return null;
         }
+    }
+
+    @RequestMapping(path = "api/pos/categories/leaf",method = RequestMethod.GET)
+    public List<Category> findPOSLeafs() {
+            return categoryService.findLeafs(null);
     }
 
 }

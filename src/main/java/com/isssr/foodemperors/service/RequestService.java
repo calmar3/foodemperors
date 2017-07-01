@@ -45,12 +45,12 @@ public class RequestService {
         this.setMapper();
         while (!send){
             try {
-                HttpResponse<JsonNode> res = Unirest.post(host).header("accept", "application/json")
+                HttpResponse<JsonNode> res = Unirest.put(host).header("accept", "application/json")
                         .header("Content-Type", "application/json")
                         .body(commissionDTO).asJson();
                 send = true;
             } catch (UnirestException e) {
-                System.out.println("Cannot post");
+                System.out.println("Cannot PUT");
             }
         }
     }
