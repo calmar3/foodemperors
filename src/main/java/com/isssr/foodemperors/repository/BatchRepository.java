@@ -15,5 +15,6 @@ public interface BatchRepository extends MongoRepository<Batch, Long> {
     List<Batch> findByProductId(String Id);
     Long deleteByCommissionId(String Id);
     Long deleteById(String Id);
+    Batch findById(String Id);
     List<Batch> findByRemainingGreaterThanEqual(Integer remaining);
 }

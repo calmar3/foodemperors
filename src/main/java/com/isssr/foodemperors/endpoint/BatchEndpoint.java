@@ -4,6 +4,8 @@ import com.isssr.foodemperors.dto.CommissionDTO;
 import com.isssr.foodemperors.model.Batch;
 import com.isssr.foodemperors.model.Product;
 import com.isssr.foodemperors.service.BatchService;
+import com.isssr.foodemperors.service.PeripheralWarehouseService;
+import com.isssr.foodemperors.service.RequestService;
 import com.isssr.foodemperors.service.TokenService;
 import com.isssr.foodemperors.utils.TokenPayload;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +32,12 @@ public class BatchEndpoint {
 
     @Inject
     private TokenService tokenService;
+
+    @Inject
+    private PeripheralWarehouseService peripheralWarehouseService;
+
+    @Inject
+    private RequestService requestService;
 
     /**
      *  Salva i batches aggiornati e restituisce il commissionDTO con la commission aggiornata
@@ -63,8 +71,12 @@ public class BatchEndpoint {
     public List<Batch> sendBatches(@RequestBody List<Batch> batches, HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
-            return batchService.sendBatches(batches);
+                || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman"))){
+            CommissionDTO commissionDTO = batchService.sendBatches(batches);
+            String host = "http://" + peripheralWarehouseService.findAddressByName(commissionDTO.getCommission().getSource()) + ":8080/api/mc/commission";
+            requestService.sendCommissionDTO(commissionDTO,host);
+            return commissionDTO.getBatches();
+        }
         else{
             response.setStatus(401);
             return null;
@@ -106,6 +118,6 @@ public class BatchEndpoint {
             response.setStatus(401);
             return null;
         }
-
     }
+
 }

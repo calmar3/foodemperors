@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,5 +27,40 @@ public class BatchesRelationService {
 
     public List<BatchesRelation> getBatchesRelation() {
         return batchesRelationRepository.findAll();
+    }
+
+    public List<BatchesRelation> getBatchesRelationByIdProd(String idProd) {
+
+
+        List<BatchesRelation> allBatchesRelation = batchesRelationRepository.findAll();
+
+        List<BatchesRelation> batchesRelationList = new ArrayList<>();
+
+        for(BatchesRelation b : allBatchesRelation)
+        {
+            if(b.getBatch().getProduct().getId().equals(idProd))
+                batchesRelationList.add(b);
+
+        }
+
+        return batchesRelationList;
+    }
+
+
+    public List<BatchesRelation> getBatchesRelationByNameProd(String nameProd) {
+
+
+        List<BatchesRelation> allBatchesRelation = batchesRelationRepository.findAll();
+
+        List<BatchesRelation> batchesRelationList = new ArrayList<>();
+
+        for(BatchesRelation b : allBatchesRelation)
+        {
+            if(b.getBatch().getProduct().getName().equals(nameProd))
+                batchesRelationList.add(b);
+
+        }
+
+        return batchesRelationList;
     }
 }

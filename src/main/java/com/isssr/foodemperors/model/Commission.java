@@ -106,4 +106,17 @@ public class  Commission {
     public void setCompleted(Boolean completed) {
         this.completed = completed;
     }
+
+    @Override
+    public String toString() {
+        return "Commission{" +
+                "id='" + id + '\'' +
+                ", number='" + number + '\'' +
+                ", date='" + date + '\'' +
+                ", source='" + source + '\'' +
+                ", destination='" + destination + '\'' +
+                ", deliveryTime='" + deliveryTime + '\'' +
+                ", completed=" + completed +
+                '}';
+    }
 }

@@ -58,8 +58,8 @@ public class ProductEndpoint {
                 || tokenPayload.getRole().equals("manager") || tokenPayload.getRole().equals("warehouseman")))
             return productService.getByCategoryAndProperties(strings);
         else{
-            response.setStatus(401);
-            return null;
+            //response.setStatus(401);
+            return productService.getByCategoryAndProperties(strings);
         }
     }
 
@@ -107,6 +107,9 @@ public class ProductEndpoint {
             }
         }
 
-
+    @RequestMapping(path = "api/pos/product/findby/category/properties/{strings}", method = RequestMethod.GET)
+    public List<Product> searchProductByPropertiesPOS(@PathVariable String strings) {
+            return productService.getByCategoryAndProperties(strings);
+    }
 
 }

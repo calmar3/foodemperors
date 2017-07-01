@@ -49,4 +49,27 @@ public class BatchesRelationEndPoint {
             return null;
         }
     }
+
+
+    //API PER DATA ANALISYS
+    @RequestMapping(path = "api/dataAnalysis/allBatchesRelation", method = RequestMethod.GET)
+    public List<BatchesRelation> getAllBatchesRelations() {
+        return batchesRelationService.getBatchesRelation();
+    }
+
+
+    //API PER DATA ANALISYS
+    @RequestMapping(path = "api/dataAnalysis/batchesRelationByIdProd/{idProd}", method = RequestMethod.GET)
+    public List<BatchesRelation> getBatchesRelationIdByProd(@PathVariable String idProd) {
+        return batchesRelationService.getBatchesRelationByIdProd(idProd);
+    }
+
+
+    //API PER DATA ANALISYS
+    @RequestMapping(path = "api/dataAnalysis/batchesRelationByNameProd/{nameProd}", method = RequestMethod.GET)
+    public List<BatchesRelation> getBatchesRelationByNameProd(@PathVariable String nameProd) {
+        return batchesRelationService.getBatchesRelationByNameProd(nameProd);
+    }
+
+
 }

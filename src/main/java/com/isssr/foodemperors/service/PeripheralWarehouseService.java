@@ -49,4 +49,13 @@ public class PeripheralWarehouseService{
         return peripheralWarehouseDTO;
     }
 
+    public String findAddressByName(String name){
+        PeripheralWarehouse peripheralWarehouse = peripheralWarehouseRepository.findByName(name);
+
+        if (peripheralWarehouse == null)
+            return null;
+        else
+            return peripheralWarehouse.getServerAddress();
+    }
+
 }

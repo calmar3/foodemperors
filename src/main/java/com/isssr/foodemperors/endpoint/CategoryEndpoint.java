@@ -102,4 +102,9 @@ public class CategoryEndpoint {
         }
     }
 
+    @RequestMapping(path = "api/pos/categories/leaf",method = RequestMethod.GET)
+    public List<Category> findPOSLeafs() {
+            return categoryService.findLeafs(null);
+    }
+
 }
