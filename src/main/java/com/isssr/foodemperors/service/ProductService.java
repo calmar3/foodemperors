@@ -1,10 +1,13 @@
 package com.isssr.foodemperors.service;
 
 import com.isssr.foodemperors.model.Product;
+import com.isssr.foodemperors.model.Property;
 import com.isssr.foodemperors.repository.ProductRepository;
+import com.isssr.foodemperors.repository.PropertyRepository;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**

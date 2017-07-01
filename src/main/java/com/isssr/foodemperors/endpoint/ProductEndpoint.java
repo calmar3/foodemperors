@@ -98,8 +98,9 @@ public class ProductEndpoint {
     public Product updateProduct(@RequestBody Product product, HttpServletRequest request, HttpServletResponse response){
             TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
             if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
-                    || tokenPayload.getRole().equals("manager")))
+                    || tokenPayload.getRole().equals("manager"))){
                 return productService.saveProduct(product);
+            }
             else {
                 response.setStatus(401);
                 return null;

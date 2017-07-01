@@ -115,7 +115,6 @@ public class BatchService {
         //4) Aggiorna BatchesRelation (NOTA: outBatches e inBatches vanno a 2 a 2!)
         for(i=0;i<outBatches.size();i++) {
             BatchesRelation batchesRelation = batchesRelationRepository.findByBatch(ourBatches.get(i));
-            System.out.println(batchesRelation);
             List<Batch> outBatch;
             if(batchesRelation == null) {
                 batchesRelation = new BatchesRelation();
