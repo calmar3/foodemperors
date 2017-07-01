@@ -141,6 +141,9 @@ public class BatchService {
             batchesRelationRepository.save(batchesRelation);
         }
         commissionDTO.getCommission().setCompleted(false);
+        for (i = 0 ; i < commissionDTO.getBatches().size() ; i++){
+            commissionDTO.getBatches().get(i).setStatus(0);
+        }
         return commissionDTO;
     }
 
@@ -184,7 +187,6 @@ public class BatchService {
     public List<Batch> getAllBatches() {
         List<Batch> batchList = batchRepository.findAll();
         ArrayList<Batch> whisper = new ArrayList<>();
-
         Iterator<Batch> iter = batchList.iterator();
         while (iter.hasNext()) {
             Batch b = iter.next();
