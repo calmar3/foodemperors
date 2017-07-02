@@ -26,7 +26,7 @@ public class PropertyEndPoint {
     private TokenService tokenService;
 
     @RequestMapping(path = "api/property", method = RequestMethod.POST)
-    public Property saveProperty(@RequestParam Property property, HttpServletRequest request, HttpServletResponse response) {
+    public Property saveProperty(@RequestBody Property property, HttpServletRequest request, HttpServletResponse response) {
         TokenPayload tokenPayload = tokenService.validateUser(request.getHeader("token"));
         if (tokenPayload != null && (tokenPayload.getRole().equals("admin")
                 || tokenPayload.getRole().equals("manager")))
