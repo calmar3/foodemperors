@@ -191,7 +191,7 @@ public class BatchService {
         while (iter.hasNext()) {
             Batch b = iter.next();
             if (b!=null && b.getRemaining() != null)
-                if (b.getCommission().getDestination().equals("FoodEmperors") && b.getRemaining() >= 0)
+                if (b.getCommission().getSource().equals("FoodEmperors") && b.getRemaining() >= 0)
                     whisper.add(b);
         }
         return whisper;
