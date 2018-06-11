@@ -41,7 +41,7 @@ public class UserEndpoint {
         User found = userService.login(user.getUsername(), user.getPassword());
         if (found == null) {
             response.setStatus(404);
-            return new String("User Not Found");
+            return new UserDTO(null,"user not found");
         } else {
             UserDTO userDTO = new UserDTO(found, tokenService.generateToken(found.getUsername(), found.getRole()));
             return userDTO;
