@@ -25,6 +25,6 @@ public class ExternalSupplierService {
     }
 
     public boolean deleteExternalSupplier(String id) {
-        return (externalSupplierRepository.deleteById(id) != 0) ;
+        return (externalSupplierRepository.deleteById(id) == 0) ;
     }
 }
